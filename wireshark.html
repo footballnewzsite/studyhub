@@ -3,235 +3,239 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Wireshark — Οδηγός & Labs</title>
+<title>Wireshark — Πλήρης Οδηγός & Labs</title>
 <link rel="stylesheet" href="style.css">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="alternate icon" type="image/png" href="assets/favicon.png">
+<meta property="og:image" content="assets/banner.png">
+<meta property="og:title" content="StudyHub — Cybersecurity Exam Prep">
+<meta property="og:description" content="Πλήρης οδηγός προετοιμασίας για εξετάσεις Κυβερνοασφάλειας">
+
+<style>
+:root {
+  --accent: #ff4d4d;
+}
+body {
+  background:#0d1117;
+  color:#e6e6e6;
+  font-family: "Segoe UI", sans-serif;
+  line-height:1.6;
+}
+header {background:#111; border-bottom:2px solid var(--accent);}
+.header .nav a.active {color:var(--accent);}
+h1,h2,h3{color:var(--accent);}
+code,pre{background:#161b22;color:#fff;padding:4px 6px;border-radius:6px;}
+.table{border-collapse:collapse;width:100%;margin-top:10px;}
+.table th,.table td{border:1px solid #333;padding:8px;}
+.diagram svg{max-width:100%;display:block;margin:auto;}
+</style>
 </head>
 <body>
-<header class="header"><div class="container">
-  <div class="logo">StudyHub — Wireshark Guide</div>
-  <div class="nav">
-    <a href="index.html">Αρχική</a>
-    <a href="networks.html">Networking</a>
-    <a href="standards.html" class="active">ISO / NIST</a>
-    <a href="csirt.html">CSIRT</a>
-    <a href="mock_exams.html">Mock Exams</a>
-    <a href="wireshark.html">Wireshark</a>
-    <a href="glossary.html">Glossary</a>
+
+<header class="header">
+  <div class="container">
+    <div class="logo">StudyHub — Wireshark & Packet Analysis</div>
+    <nav class="nav">
+      <a href="index.html">Αρχική</a>
+      <a href="networks.html">Networking</a>
+      <a href="wireshark.html" class="active">Wireshark</a>
+      <a href="standards.html">ISO / NIST</a>
+      <a href="csirt.html">CSIRT</a>
+      <a href="mock_exams.html">Mock Exams</a>
+      <a href="glossary.html">Glossary</a>
+    </nav>
   </div>
-</div></header>
+</header>
 
 <main class="container">
   <div class="card">
-    <h1>Wireshark — Τι είναι και πώς το χρησιμοποιούμε (πρακτικός οδηγός)</h1>
+    <h1>Wireshark — Packet Capture & Analysis</h1>
 
-    <h2>1. Σύντομη περιγραφή</h2>
-    <p><strong>Wireshark</strong> είναι ο δημοφιλέστερος packet analyzer — επιτρέπει capture, ανάλυση και οπτικοποίηση πακέτων δικτύου. Χρησιμοποιείται σε troubleshooting, forensic analysis, network performance debugging και security analysis.</p>
-
-    <h2>2. Εγκατάσταση (γρήγορα)</h2>
+    <h2>1. Εισαγωγή</h2>
+    <p>
+      Το <strong>Wireshark</strong> είναι ένα ισχυρό εργαλείο packet capture και analysis (Network Protocol Analyzer).  
+      Χρησιμοποιείται από αναλυτές, forensic examiners, penetration testers και CSIRTs για:
+    </p>
     <ul>
-      <li><strong>Windows:</strong> κατέβασε το installer από την επίσημη σελίδα Wireshark, εγκατάστησε και συνήθως περιλαμβάνει WinPcap/Npcap. Επιλέγεις Npcap (win10+).</li>
-      <li><strong>Linux (Ubuntu):</strong>
-        <pre>sudo apt update
-sudo apt install wireshark tshark</pre>
-        (θα σε ρωτήσει αν non-root users επιτρέπεται να τρέχουν captures — απάντησε με προσοχή).</li>
-      <li><strong>macOS:</strong> Homebrew: <code>brew install --cask wireshark</code> ή επίσημο DMG.</li>
+      <li>Κατανόηση της ροής δεδομένων (TCP/UDP, HTTP, DNS, SSL/TLS)</li>
+      <li>Ανίχνευση ανωμαλιών, καθυστερήσεων ή ύποπτων δραστηριοτήτων</li>
+      <li>Απόδειξη επίθεσης (forensic evidence)</li>
     </ul>
 
-    <h2>3. Capture basics — πριν ξεκινήσεις</h2>
-    <ol>
-      <li>Επίλεξε σωστή διεπαφή (interface): Ethernet, Wi-Fi ή host-only VM interface.</li>
-      <li>Πρόσεξε: σε Wi-Fi μπορεί να χρειαστεί monitor mode για να δεις όλα τα πακέτα (όχι μόνο αυτά προς/από τον υπολογιστή σου).</li>
-      <li>Χρησιμοποίησε capture filter (BPF) για να μειώσεις τον όγκο (π.χ. capture μόνο traffic σε συγκεκριμένη host/port).</li>
-      <li>Πάντα πάρε snapshot (VM) ή ξεκίνα capture σε isolated lab — μην παγιδεύεις ευαίσθητα εταιρικά πακέτα χωρίς εξουσιοδότηση.</li>
-    </ol>
-
-    <h2>4. Capture filters vs Display filters</h2>
-    <p>Σημαντική διάκριση:</p>
+    <h2>2. Εγκατάσταση</h2>
     <ul>
-      <li><strong>Capture filters (BPF):</strong> εφαρμόζονται κατά τη συλλογή (πιο αποδοτικοί, συντακτικά BPF). Παράδειγμα: <code>host 192.168.1.10 and port 80</code>.</li>
-      <li><strong>Display filters:</strong> εφαρμόζονται μετά το capture στην εμφάνιση (πολύ πιο ισχυροί, συντακτικό Wireshark display filters). Παράδειγμα: <code>http.request.method == "GET" && ip.src == 192.168.1.10</code>.</li>
+      <li><strong>Windows:</strong> Κατεβάστε το Wireshark από <a href="https://www.wireshark.org/download.html" target="_blank">wireshark.org</a>.</li>
+      <li>Περιλαμβάνει το <strong>Npcap</strong> driver για packet capturing.</li>
+      <li><strong>Linux:</strong> <code>sudo apt install wireshark</code> ή <code>dnf install wireshark</code></li>
+      <li><strong>macOS:</strong> μέσω Homebrew <code>brew install wireshark</code></li>
     </ul>
 
-    <h2>5. Χρήσιμα Capture filters (BPF examples)</h2>
+    <h2>3. Εννοιολογική εικόνα capture</h2>
+    <div class="diagram">
+      <svg viewBox="0 0 800 200">
+        <rect width="100%" height="100%" fill="#0d1117"/>
+        <g fill="#e6e6e6" font-family="Arial" font-size="13">
+          <text x="60" y="40">Application Layer (HTTP, DNS, TLS)</text>
+          <text x="60" y="80">Transport Layer (TCP, UDP)</text>
+          <text x="60" y="120">Network Layer (IP)</text>
+          <text x="60" y="160">Data Link Layer (Ethernet)</text>
+        </g>
+        <rect x="450" y="40" width="300" height="120" rx="10" ry="10" fill="none" stroke="#ff4d4d" stroke-width="2"/>
+        <text x="470" y="105" fill="#ff4d4d" font-family="Arial">Wireshark Capture & Decode</text>
+      </svg>
+    </div>
+
+    <h2>4. Packet Capture vs Display Filters</h2>
+    <p>
+      Υπάρχουν δύο βασικοί τύποι φίλτρων:
+    </p>
+    <ul>
+      <li><strong>Capture filters (BPF):</strong> καθορίζουν ποια packets θα καταγραφούν (π.χ. <code>tcp port 80</code>)</li>
+      <li><strong>Display filters:</strong> καθορίζουν τι εμφανίζεται στο GUI (π.χ. <code>http && ip.src==192.168.1.10</code>)</li>
+    </ul>
+
+    <h3>Συχνά Capture Filters</h3>
     <pre>
-# Capture only traffic to/from host
-host 192.168.1.10
-
-# Capture only TCP traffic on port 443
+host 192.168.1.5
+net 10.0.0.0/24
 tcp port 443
-
-# Capture only traffic between two subnets
-net 10.0.0.0/8 and net 192.168.0.0/16
-
-# Capture only DNS traffic (UDP or TCP port 53)
-port 53
-    </pre>
-
-    <h2>6. Χρήσιμα Display filters (Wireshark)</h2>
-    <p>Αντέγραψε & κόλλησε στην κορυφή (display filter bar):</p>
-    <pre>
-# HTTP GET requests
-http.request.method == "GET"
-
-# DNS queries
-dns.flags.response == 0
-
-# TCP handshake (SYN packets only)
-tcp.flags.syn == 1 && tcp.flags.ack == 0
-
-# TCP retransmissions
-tcp.analysis.retransmission
-
-# TLS (SSL) traffic
-ssl || tls
-
-# Follow TCP stream for a given packet
-# (Right-click packet -> Follow -> TCP Stream) — no filter needed, αλλά display filter example:
-tcp.stream == 3
-
-# Filter by IP address
-ip.addr == 192.168.1.10
-
-# Show packets with suspicious HTTP file transfer
-http.file_data
-
-# Show HTTP status codes >= 400
-http.response.code >= 400
-    </pre>
-
-    <h2>7. Βήμα-βήμα βασικά workflows (με παραδείγματα)</h2>
-
-    <h3>7.1. Βρες όλα τα HTTP GET requests από ένα host</h3>
-    <ol>
-      <li>Capture (ή άνοιξε pcap) και σε display filter βάλτε: <code>http.request.method == "GET" && ip.src == 192.168.1.10</code></li>
-      <li>Δεξί κλικ σε πακέτο → <em>Follow</em> → <em>HTTP Stream</em> για όλο το περιεχόμενο της σύνδεσης.</li>
-      <li>Export → Save As → Plain Text αν θέλεις το σώμα του αιτήματος.</li>
-    </ol>
-
-    <h3>7.2. Εντοπισμός DNS exfiltration (παράδειγμα)</h3>
-    <ol>
-      <li>Display filter: <code>dns && ip.src == 192.168.1.10</code></li>
-      <li>Αναζήτηση για πολλαπλές μακρινές TXT / long subdomain queries — pattern: base32/base64 in subdomain.</li>
-      <li>Εξήγηση: attackers χρησιμοποιούν DNS queries με encoded data.</li>
-    </ol>
-
-    <h3>7.3. Ανάλυση TCP handshake & incomplete connections (SYN flood)</h3>
-    <ol>
-      <li>Display filter for SYN without ACK: <code>tcp.flags.syn == 1 && tcp.flags.ack == 0</code></li>
-      <li>Μετρήστε πόσες μοναδικές src IP στέλνουν SYN σε short time window (Statistics → Conversations → TCP → μοναδικές IPs).</li>
-      <li>Αν υπάρχουν πολλά SYNs χωρίς ολοκλήρωση → πιθανό SYN flood.</li>
-    </ol>
-
-    <h3>7.4. Extract a file transferred over HTTP</h3>
-    <ol>
-      <li>Display filter: <code>http && http.content_type</code></li>
-      <li>Menu: File → Export Objects → HTTP → επιλέξτε file → Save.</li>
-      <li>Compute hash & analyze file offline (VirusTotal / sandbox) — χρησιμοποιήστε εκτός δικτύου ή σε isolated lab.</li>
-    </ol>
-
-    <h2>8. Advanced topics & forensic tips</h2>
-    <h3>8.1. TLS decryption — practical notes</h3>
-    <p>Στις σύγχρονες συνδέσεις TLS με PFS (Perfect Forward Secrecy) δεν μπορείς να αποκρυπτογραφήσεις πακέτα απλά με το private key. Οι δύο τρόποι για να αποκρυπτογραφήσεις TLS στην ανάλυση:</p>
-    <ul>
-      <li><strong>SSLKEYLOGFILE</strong>: στον browser (π.χ. Firefox/Chrome) μπορείς να ρυθμίσεις το περιβάλλον για να γράφει pre-master secrets σε αρχείο (SSLKEYLOGFILE), το οποίο φορτώνεις στο Wireshark → Preferences → Protocols → TLS → (Pre)-Master-Secret log filename.</li>
-      <li><strong>Private key:</strong> χρήση private key λειτουργεί μόνο αν δεν χρησιμοποιείται ephemeral key exchange (σπανίως χρήσιμο σε σύγχρονες ρυθμίσεις).</li>
-    </ul>
-
-    <h3>8.2. Use Statistics (Powerful)</h3>
-    <ul>
-      <li><strong>Statistics → Summary:</strong> γενική εικόνα (packets, duration, top protocols).</li>
-      <li><strong>Statistics → Conversations:</strong> δείχνει top talkers (IP pairs) — χρήσιμο για bandwidth/attack detection.</li>
-      <li><strong>Statistics → Endpoints:</strong> list of IP addresses & traffic volume.</li>
-      <li><strong>Statistics → IO Graphs:</strong> σχεδιάζεις traffic rate over time — χρήσιμο για DoS detection.</li>
-      <li><strong>Statistics → Expert Information:</strong> ειδοποιήσεις για anomalies, retransmissions, malformed packets.</li>
-    </ul>
-
-    <h2>9. Tshark — command line power</h2>
-    <p><strong>tshark</strong> = command-line έκδοση του Wireshark. Πολύ χρήσιμο για automation και επεξεργασία μεγάλων pcap.</p>
-    <pre>
-# Capture for 60 seconds on interface eth0 and write to file
-tshark -i eth0 -a duration:60 -w capture.pcap
-
-# Read pcap and show HTTP requests only
-tshark -r capture.pcap -Y 'http.request' -T fields -e ip.src -e http.request.method -e http.host -e http.request.uri
-
-# Extract DNS queries to CSV
-tshark -r capture.pcap -Y 'dns.flags.response == 0' -T fields -e frame.time -e ip.src -e dns.qry.name
-
-# Count number of packets per IP
-tshark -r capture.pcap -q -z conv,ip
-    </pre>
-
-    <h2>10. Labs — 3 πρακτικά exercises (copy-paste ready)</h2>
-
-    <h3>Lab 1 — Αναζήτηση HTTP POST με credentials</h3>
-    <ol>
-      <li>Capture traffic ενώ κάνεις login σε test server (σε isolated lab).</li>
-      <li>Display filter: <code>http.request.method == "POST" && http contains "password"</code></li>
-      <li>Follow TCP stream → αναζήτησε form fields (username/password) στο payload.</li>
-      <li>Σημείωση: σε HTTPS δεν θα δεις το cleartext χωρίς SSLKEYLOGFILE.</li>
-    </ol>
-
-    <h3>Lab 2 — Εύρεση DNS exfiltration pattern</h3>
-    <ol>
-      <li>Load pcap (ή capture) με πολλά DNS queries.</li>
-      <li>Filter: <code>dns.flags.response == 0 && dns.qry.name matches "^[A-Za-z0-9]{50,}\."</code> (regex δείγμα — χρησιμοποιήστε κατάλληλη έκδοση Wireshark που υποστηρίζει regex στο display filter ή εξαγάγετε τα ονόματα με tshark και κάντε grep).</li>
-      <li>Αν εντοπίσετε μεγάλα, συχνά subdomain strings → πιθανά exfiltration via DNS.</li>
-    </ol>
-
-    <h3>Lab 3 — Αναγνώριση lateral movement (SMB/NTLM)</h3>
-    <ol>
-      <li>Filter: <code>nbss || smb || smb2</code></li>
-      <li>Ελέγξτε authentication attempts, NTLM challenge/response, και ύποπτες file operations.</li>
-      <li>Statistics → Conversations → IP pairs to see which host initiated many SMB connections.</li>
-    </ol>
-
-    <h2>11. Exporting & Evidence handling</h2>
-    <ul>
-      <li>Save pcap: File → Save As → pcapng (include all packets & comments).</li>
-      <li>Export selected packets: File → Export Specified Packets (range, display filter).</li>
-      <li>Always compute hash of pcap after saving: <code>sha256sum capture.pcap</code>.</li>
-      <li>Document capture parameters: interface, capture filter, start/end time, operator name.</li>
-    </ul>
-
-    <h2>12. Troubleshooting common issues</h2>
-    <ul>
-      <li><strong>No packets on Wi-Fi:</strong> needs monitor mode or the correct driver (Npcap in Windows with support).</li>
-      <li><strong>Large pcap file:</strong> use tshark to extract relevant flows and delete rest: <code>tshark -r big.pcap -Y 'ip.addr==X' -w filtered.pcap</code>.</li>
-      <li><strong>Protocol not decoded correctly:</strong> Right-click → Decode As → choose protocol (e.g., TCP port 8080 -> HTTP).</li>
-      <li><strong>Time offset wrong:</strong> Preferences → Name Resolution & Time → adjust time display or synchronize clocks (important for timeline correlation).</li>
-    </ul>
-
-    <h2>13. Security & privacy — σημαντικές σημειώσεις</h2>
-    <ul>
-      <li>Packets μπορεί να περιέχουν credentials, PII, cookies — χειριστείτε τα με ασφάλεια.</li>
-      <li>Μην αποθηκεύετε captures με ευαίσθητα δεδομένα σε μη κρυπτογραφημένα shared folders.</li>
-      <li>Όταν μοιράζεστε pcap για assistance, κάντε anonymize ή remove payloads με προσωπικά στοιχεία.</li>
-    </ul>
-
-    <h2>14. Quick cheat sheet — Display filters (copy)</h2>
-    <pre>
-ip.addr == 10.0.0.5
-tcp.port == 3389
-udp.port == 53
-http.request.uri contains "/login"
-dns.qry.name == "example.com"
-ssl.handshake.type == 1
-tcp.analysis.ack_rtt
-tcp.analysis.retransmission
+udp port 53
 icmp
-arp
+not broadcast and not multicast
     </pre>
 
-    <h2>15. Exam tips — τι να μάθεις για τις εξετάσεις</h2>
+    <h3>Συχνά Display Filters</h3>
+    <pre>
+ip.addr == 8.8.8.8
+tcp.flags.syn == 1 and tcp.flags.ack == 0
+dns.qry.name contains "example.com"
+http.request.method == "POST"
+tls.handshake.type == 1
+    </pre>
+
+    <h2>5. Ανάλυση TCP 3-way Handshake</h2>
+    <ol>
+      <li><strong>SYN</strong>: Client → Server (Initiate)</li>
+      <li><strong>SYN/ACK</strong>: Server → Client (Acknowledge)</li>
+      <li><strong>ACK</strong>: Client → Server (Confirm)</li>
+    </ol>
+    <p>Σε Wireshark φίλτρο: <code>tcp.flags.syn==1</code> δείχνει το πρώτο handshake.</p>
+
+    <h2>6. Ανάλυση DNS / HTTP / ARP Traffic</h2>
+    <h3>DNS Lookup</h3>
+    <pre>
+Frame 1: 74 bytes
+Query: example.com  Type: A  → Response: 93.184.216.34
+Filter: dns
+    </pre>
+
+    <h3>HTTP Request</h3>
+    <pre>
+GET /index.html HTTP/1.1
+Host: example.com
+User-Agent: Mozilla/5.0
+Filter: http.request
+    </pre>
+
+    <h3>ARP Exchange</h3>
+    <pre>
+Who has 192.168.1.1? Tell 192.168.1.10
+192.168.1.1 is at 00:11:22:33:44:55
+Filter: arp
+    </pre>
+
+    <h2>7. Labs (Step-by-Step)</h2>
+
+    <h3>Lab 1 — Capture και Αναγνώριση Handshake</h3>
+    <ol>
+      <li>Άνοιξε Wireshark και ξεκίνησε capture στο interface (π.χ. Ethernet ή Wi-Fi).</li>
+      <li>Άνοιξε ένα browser και μπες στο <code>http://example.com</code>.</li>
+      <li>Σταμάτησε capture, εφάρμοσε filter: <code>tcp.flags.syn==1</code>.</li>
+      <li>Παρατήρησε τη ροή SYN → SYN/ACK → ACK.</li>
+    </ol>
+
+    <h3>Lab 2 — DNS Query Tracking</h3>
+    <ol>
+      <li>Filter: <code>dns</code></li>
+      <li>Βρες <code>Standard query 0x...</code> και την απάντηση.</li>
+      <li>Δες το “Response time” στη στήλη Info — χρησιμοποίησε το Statistics → Service Response Time → DNS.</li>
+    </ol>
+
+    <h3>Lab 3 — TLS Session Analysis</h3>
+    <ol>
+      <li>Filter: <code>tls.handshake.type==1</code> (Client Hello)</li>
+      <li>Παρατήρησε τα “Cipher Suites”, “Server Name Indication (SNI)”</li>
+      <li>Filter: <code>tls.handshake.type==2</code> (Server Hello)</li>
+    </ol>
+
+    <h3>Lab 4 — Suspicious Traffic Detection</h3>
+    <p>Εντοπισμός ύποπτης επικοινωνίας (e.g. beaconing)</p>
+    <pre>
+frame.time_delta_displayed > 5 and ip.dst==198.51.100.45
+    </pre>
+    <p>Αναζητά πακέτα με χρονικά διαστήματα μεγαλύτερα των 5s προς συγκεκριμένο IP.</p>
+
+    <h3>Lab 5 — Export Objects (HTTP, SMB)</h3>
+    <ol>
+      <li>File → Export Objects → HTTP → Save selected file.</li>
+      <li>Για forensic χρήση: επιτρέπει ανάκτηση αρχείων που μεταφέρθηκαν χωρίς κρυπτογράφηση.</li>
+    </ol>
+
+    <h2>8. Προχωρημένες Λειτουργίες</h2>
     <ul>
-      <li>Διαφορές capture vs display filters και BPF syntax basics.</li>
-      <li>Πώς αναγνωρίζεις ένα TCP 3-way handshake στο capture.</li>
-      <li>Ποια στατιστικά στο Wireshark χρησιμοποιούνται για να αποδείξουν DoS / high retransmissions / top talkers.</li>
-      <li>Πρακτικά commands tshark για automation — παράδειγμα εξαγωγής DNS queries.</li>
+      <li><strong>Statistics → Conversations:</strong> δείχνει συνολική επικοινωνία ανά IP ή MAC.</li>
+      <li><strong>Follow → TCP Stream:</strong> πλήρης ανασύνθεση συνεδρίας.</li>
+      <li><strong>IO Graphs:</strong> οπτικοποίηση ρυθμού μεταφοράς (bps / pps).</li>
+      <li><strong>Coloring Rules:</strong> π.χ. κόκκινο για retransmissions (<code>tcp.analysis.retransmission</code>).</li>
     </ul>
 
-    <div class="footer">Αν θες, ενσωματώνω αυτή τη σελίδα στο ZIP και/ή την εξάγω σε PDF. Θες επίσης να σου δώσω 5-10 sample pcaps (ελαφριά, ασφαλή) για πρακτική;</div>
+    <h2>9. Quick Troubleshooting Examples</h2>
+    <table class="table">
+      <tr><th>Σενάριο</th><th>Wireshark Filter</th><th>Ανάλυση</th></tr>
+      <tr><td>Αργό HTTP site</td><td>tcp.analysis.flags</td><td>Δες retransmissions & latency per packet</td></tr>
+      <tr><td>DNS failure</td><td>dns.flags.rcode != 0</td><td>RCODE 2=Server failure, 3=NXDOMAIN</td></tr>
+      <tr><td>ICMP unreachable</td><td>icmp.type==3</td><td>Δες gateway που στέλνει το unreachable</td></tr>
+    </table>
+
+    <h2>10. Ερωτήσεις Εξάσκησης (Exam Prep)</h2>
+    <h3>Q1.</h3><p>Ποια είναι η διαφορά capture filter και display filter;</p>
+    <p><strong>A:</strong> Capture = τι πακέτα συλλέγονται, Display = τι προβάλλεται στο GUI.</p>
+
+    <h3>Q2.</h3><p>Πώς εντοπίζουμε το TCP handshake σε capture;</p>
+    <p><strong>A:</strong> Φίλτρο <code>tcp.flags.syn==1</code> — βλέπουμε τρία πακέτα SYN, SYN/ACK, ACK.</p>
+
+    <h3>Q3.</h3><p>Ποιο φίλτρο δείχνει όλα τα DNS queries προς domain που περιέχει "edu";</p>
+    <p><strong>A:</strong> <code>dns.qry.name contains "edu"</code></p>
+
+    <h3>Q4.</h3><p>Ποια επιλογή στο Wireshark επιτρέπει να ανασυνθέσεις ένα κατεβασμένο αρχείο;</p>
+    <p><strong>A:</strong> File → Export Objects → HTTP (ή SMB)</p>
+
+    <h3>Q5.</h3><p>Τι δείχνει το Statistics → Conversations;</p>
+    <p><strong>A:</strong> Την πλήρη λίστα IP pairs που αντάλλαξαν πακέτα, με bytes, packets και χρονικά στοιχεία.</p>
+
+    <h2>11. Quick Reference Sheet</h2>
+    <pre>
+Ctrl+E — Start/Stop capture
+Ctrl+K — Clear display filter
+Ctrl+F — Find packet
+Ctrl+H — Follow TCP stream
+Ctrl+Shift+T — IO Graphs
+Ctrl+Alt+F — Apply as Filter
+    </pre>
+
+    <h2>12. Επανάληψη — 10 σημεία για εξετάσεις</h2>
+    <ol>
+      <li>Κατανόησε TCP 3-way handshake & flags.</li>
+      <li>Γνώρισε DNS query/response format.</li>
+      <li>Μάθε φίλτρα display/capture.</li>
+      <li>Ανάλυση TLS handshake & SNI.</li>
+      <li>Follow TCP stream — reconstruction.</li>
+      <li>Export Objects για forensic recovery.</li>
+      <li>Statistics → IO Graphs.</li>
+      <li>χρήση time delta για detection.</li>
+      <li>χρήση color rules για packet types.</li>
+      <li>Αναγνώριση επιθέσεων: SYN flood, DNS tunneling, beaconing.</li>
+    </ol>
   </div>
 </main>
 </body>

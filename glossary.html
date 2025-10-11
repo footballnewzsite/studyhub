@@ -1,37 +1,128 @@
 <!doctype html>
 <html lang="el">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Glossary — Όροι</title>
-<link rel="stylesheet" href="style.css"></head>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Glossary — StudyHub</title>
+<link rel="stylesheet" href="style.css">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="alternate icon" type="image/png" href="assets/favicon.png">
+<meta property="og:image" content="assets/banner.png">
+<meta property="og:title" content="StudyHub — Cybersecurity Exam Prep">
+<meta property="og:description" content="Πλήρης οδηγός προετοιμασίας για εξετάσεις Κυβερνοασφάλειας">
+
+<style>
+:root { --accent:#ff4d4d; }
+body {
+  background:#0d1117;
+  color:#e6e6e6;
+  font-family:"Segoe UI",sans-serif;
+  line-height:1.7;
+}
+header{background:#111;border-bottom:2px solid var(--accent);}
+.nav a.active{color:var(--accent);}
+h1,h2{color:var(--accent);}
+.glossary-term{border-left:4px solid var(--accent);padding:8px 12px;margin:12px 0;background:#161b22;border-radius:8px;}
+.glossary-term strong{color:#ff9999;}
+input[type="text"]{width:100%;padding:10px;margin-bottom:15px;border-radius:8px;border:none;outline:none;background:#161b22;color:#eee;}
+footer{margin-top:32px;text-align:center;color:#aaa;}
+</style>
+<script>
+function searchGlossary(){
+  const q=document.getElementById('search').value.toLowerCase();
+  document.querySelectorAll('.glossary-term').forEach(div=>{
+    div.style.display=div.textContent.toLowerCase().includes(q)?'block':'none';
+  });
+}
+</script>
+</head>
 <body>
-<header class="header"><div class="container">
-<div class="logo">StudyHub — Glossary</div>
-<div class="nav">
-  <a href="index.html">Αρχική</a>
-    <a href="networks.html">Networking</a>
-    <a href="standards.html" class="active">ISO / NIST</a>
-    <a href="csirt.html">CSIRT</a>
-    <a href="mock_exams.html">Mock Exams</a>
-    <a href="wireshark.html">Wireshark</a>
-    <a href="glossary.html">Glossary</a>
-</div>
-</div></header>
+
+<header class="header">
+  <div class="container">
+    <div class="logo">StudyHub — Glossary</div>
+    <nav class="nav">
+      <a href="index.html">Αρχική</a>
+      <a href="networks.html">Networking</a>
+      <a href="wireshark.html">Wireshark</a>
+      <a href="standards.html">Standards</a>
+      <a href="csirt.html">CSIRT</a>
+      <a href="mock_exams.html">Mock Exams</a>
+      <a href="glossary.html" class="active">Glossary</a>
+    </nav>
+  </div>
+</header>
 
 <main class="container">
   <div class="card">
-    <h1>Glossary — Σημαντικοί Όροι</h1>
-    <table class="table">
-      <tr><th>Term</th><th>Explanation (GR)</th></tr>
-      <tr><td>Incident Response</td><td>Διαδικασία ανίχνευσης και αντιμετώπισης περιστατικού ασφάλειας</td></tr>
-      <tr><td>Threat Intelligence</td><td>Συλλογή και ανάλυση πληροφοριών για απειλές (IOCs, TTPs)</td></tr>
-      <tr><td>SIEM</td><td>Security Information & Event Management — συγκέντρωση logs & correlation</td></tr>
-      <tr><td>MFA</td><td>Multi-Factor Authentication</td></tr>
-      <tr><td>RTO / RPO</td><td>Recovery Time Objective / Recovery Point Objective</td></tr>
-      <tr><td>MITRE ATT&CK</td><td>Knowledge base of adversary tactics & techniques</td></tr>
-      <tr><td>EDR</td><td>Endpoint Detection & Response</td></tr>
-    </table>
+    <h1>Cybersecurity & Networking Glossary</h1>
+    <p>Βασικοί όροι και ορολογία που συναντώνται συχνά στις εξετάσεις — με αγγλική ονομασία και επεξήγηση στα ελληνικά.</p>
+
+    <input type="text" id="search" onkeyup="searchGlossary()" placeholder="Αναζήτηση όρου...">
+
+    <!-- NETWORKING -->
+    <h2>Networking</h2>
+    <div class="glossary-term"><strong>LAN (Local Area Network):</strong> Τοπικό δίκτυο μικρής γεωγραφικής εμβέλειας (π.χ. γραφείο, σπίτι).</div>
+    <div class="glossary-term"><strong>WAN (Wide Area Network):</strong> Δίκτυο μεγάλης εμβέλειας που συνδέει πολλαπλά LANs (π.χ. Internet).</div>
+    <div class="glossary-term"><strong>IP Address:</strong> Μοναδικός αριθμός που προσδιορίζει μια συσκευή στο δίκτυο.</div>
+    <div class="glossary-term"><strong>Private IP:</strong> Διεύθυνση για εσωτερικά δίκτυα (10.x.x.x, 192.168.x.x).</div>
+    <div class="glossary-term"><strong>Public IP:</strong> Διεύθυνση που είναι ορατή στο Internet.</div>
+    <div class="glossary-term"><strong>Subnet Mask:</strong> Ορίζει ποιο μέρος της IP δείχνει το δίκτυο και ποιο τον host.</div>
+    <div class="glossary-term"><strong>Router:</strong> Συσκευή που προωθεί πακέτα μεταξύ διαφορετικών δικτύων.</div>
+    <div class="glossary-term"><strong>Switch:</strong> Συσκευή που συνδέει συσκευές στο ίδιο LAN.</div>
+    <div class="glossary-term"><strong>Firewall:</strong> Φιλτράρει την κυκλοφορία δικτύου βάσει κανόνων ασφαλείας.</div>
+    <div class="glossary-term"><strong>DNS (Domain Name System):</strong> Μετατρέπει domain names σε IP addresses.</div>
+    <div class="glossary-term"><strong>DHCP:</strong> Υπηρεσία που εκχωρεί αυτόματα IP διευθύνσεις.</div>
+    <div class="glossary-term"><strong>TCP:</strong> Πρωτόκολλο αξιόπιστης επικοινωνίας με επιβεβαίωση (ACK).</div>
+    <div class="glossary-term"><strong>UDP:</strong> Ανεξάρτητη, χωρίς επιβεβαίωση επικοινωνία (π.χ. streaming).</div>
+    <div class="glossary-term"><strong>VLAN:</strong> Εικονικό LAN για λογικό διαχωρισμό δικτύων.</div>
+    <div class="glossary-term"><strong>Packet Sniffing:</strong> Παρακολούθηση/ανάλυση δικτυακής κυκλοφορίας (π.χ. Wireshark).</div>
+
+    <!-- CYBERSECURITY -->
+    <h2>Cybersecurity & Risk</h2>
+    <div class="glossary-term"><strong>Confidentiality:</strong> Διασφάλιση ότι μόνο εξουσιοδοτημένα άτομα έχουν πρόσβαση σε πληροφορίες.</div>
+    <div class="glossary-term"><strong>Integrity:</strong> Διατήρηση ακρίβειας και πληρότητας δεδομένων.</div>
+    <div class="glossary-term"><strong>Availability:</strong> Διαθεσιμότητα συστημάτων και υπηρεσιών όταν χρειάζονται.</div>
+    <div class="glossary-term"><strong>Vulnerability:</strong> Αδύναμο σημείο που μπορεί να εκμεταλλευτεί επιτιθέμενος.</div>
+    <div class="glossary-term"><strong>Threat:</strong> Δυνητικός κίνδυνος ή ενέργεια που μπορεί να προκαλέσει ζημιά.</div>
+    <div class="glossary-term"><strong>Risk:</strong> Πιθανότητα απειλής να εκμεταλλευτεί μια ευπάθεια.</div>
+    <div class="glossary-term"><strong>Malware:</strong> Κακόβουλο λογισμικό (virus, trojan, ransomware).</div>
+    <div class="glossary-term"><strong>Phishing:</strong> Απόπειρα υποκλοπής στοιχείων μέσω ψεύτικων emails.</div>
+    <div class="glossary-term"><strong>DoS / DDoS:</strong> Επίθεση άρνησης υπηρεσίας (overload servers).</div>
+    <div class="glossary-term"><strong>Zero-Day:</strong> Ευπάθεια χωρίς διαθέσιμο patch.</div>
+    <div class="glossary-term"><strong>Patch Management:</strong> Διαδικασία ενημέρωσης λογισμικού για ασφάλεια.</div>
+    <div class="glossary-term"><strong>Encryption:</strong> Κρυπτογράφηση δεδομένων για προστασία απορρήτου.</div>
+    <div class="glossary-term"><strong>Hashing:</strong> Μονοδρομική συνάρτηση για έλεγχο ακεραιότητας (SHA-256).</div>
+    <div class="glossary-term"><strong>2FA / MFA:</strong> Επαλήθευση ταυτότητας με δεύτερο παράγοντα (π.χ. SMS code).</div>
+
+    <!-- INCIDENT RESPONSE -->
+    <h2>Incident Response & Forensics</h2>
+    <div class="glossary-term"><strong>Incident:</strong> Γεγονός που επηρεάζει ή απειλεί την ασφάλεια ενός συστήματος.</div>
+    <div class="glossary-term"><strong>CSIRT:</strong> Computer Security Incident Response Team – υπεύθυνη ομάδα IR.</div>
+    <div class="glossary-term"><strong>Incident Response Plan:</strong> Καθορισμένες διαδικασίες για αντιμετώπιση περιστατικών.</div>
+    <div class="glossary-term"><strong>Containment:</strong> Περιορισμός διάδοσης περιστατικού.</div>
+    <div class="glossary-term"><strong>Eradication:</strong> Εξάλειψη κακόβουλου λογισμικού ή προσβολής.</div>
+    <div class="glossary-term"><strong>Recovery:</strong> Επαναφορά συστημάτων σε κανονική λειτουργία.</div>
+    <div class="glossary-term"><strong>Root Cause Analysis:</strong> Ανίχνευση της πραγματικής αιτίας ενός περιστατικού.</div>
+    <div class="glossary-term"><strong>Forensic Imaging:</strong> Αντιγραφή δεδομένων με σκοπό διατήρηση αποδεικτικών στοιχείων.</div>
+    <div class="glossary-term"><strong>Chain of Custody:</strong> Καταγραφή χειρισμού αποδεικτικών για να διασφαλιστεί ακεραιότητα.</div>
+    <div class="glossary-term"><strong>Threat Intelligence:</strong> Ανάλυση και συλλογή πληροφοριών για τρέχουσες απειλές.</div>
+    <div class="glossary-term"><strong>Vulnerability Assessment:</strong> Έλεγχος για γνωστές ευπάθειες.</div>
+    <div class="glossary-term"><strong>Penetration Testing:</strong> Προσομοιωμένη επίθεση για αξιολόγηση άμυνας.</div>
+    <div class="glossary-term"><strong>SIEM:</strong> Security Information and Event Management – συλλογή και ανάλυση logs.</div>
+    <div class="glossary-term"><strong>IOC (Indicator of Compromise):</strong> Ίχνος ή στοιχείο που υποδεικνύει παραβίαση (hash, IP, domain).</div>
+    <div class="glossary-term"><strong>Playbook:</strong> Προκαθορισμένα βήματα για αντιμετώπιση συγκεκριμένων περιστατικών.</div>
+
+    <!-- STANDARDS -->
+    <h2>Standards & Compliance</h2>
+    <div class="glossary-term"><strong>ISO/IEC 27001:</strong> Πρότυπο για σύστημα διαχείρισης ασφάλειας πληροφοριών (ISMS).</div>
+    <div class="glossary-term"><strong>ISO/IEC 27002:</strong> Κατευθυντήριες γραμμές ελέγχων ασφαλείας.</div>
+    <div class="glossary-term"><strong>NIST SP 800-53:</strong> Πλαίσιο ελέγχων ασφάλειας από το NIST.</div>
+    <div class="glossary-term"><strong>NIST Cybersecurity Framework:</strong> Πλαίσιο 5 λειτουργιών (Identify, Protect, Detect, Respond, Recover).</div>
+    <div class="glossary-term"><strong>PDCA Cycle:</strong> Plan–Do–Check–Act — συνεχής βελτίωση ISMS.</div>
+    <div class="glossary-term"><strong>KΔΠ 389/2020:</strong> Κυπριακή απόφαση που καθορίζει μέτρα κυβερνοασφάλειας για κρίσιμες υποδομές.</div>
+
   </div>
-  <div class="footer">Σημείωση: μάθε τους αγγλικούς όρους όπως εμφανίζονται — συχνά στις εξετάσεις ζητούνται με τον αγγλικό όρο.</div>
 </main>
 </body>
 </html>

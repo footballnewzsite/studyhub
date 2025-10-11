@@ -3,46 +3,123 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>StudyHub — Οδηγός Προετοιμασίας</title>
+<title>StudyHub — Cybersecurity Exam Preparation</title>
 <link rel="stylesheet" href="style.css">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="alternate icon" type="image/png" href="assets/favicon.png">
+<meta property="og:image" content="assets/banner.png">
+<meta property="og:title" content="StudyHub — Cybersecurity Exam Prep">
+<meta property="og:description" content="Πλήρης οδηγός προετοιμασίας για εξετάσεις Κυβερνοασφάλειας">
+
+<style>
+:root { --accent:#ff4d4d; }
+body {
+  background:#0d1117;
+  color:#e6e6e6;
+  font-family:"Segoe UI",sans-serif;
+  line-height:1.7;
+}
+header{background:#111;border-bottom:2px solid var(--accent);}
+.nav a.active{color:var(--accent);}
+h1,h2{color:var(--accent);}
+section{margin:40px 0;}
+.card{background:#161b22;padding:20px;border-radius:12px;box-shadow:0 0 8px #0005;}
+.btn{display:inline-block;padding:10px 16px;margin:6px 4px;background:var(--accent);color:#fff;text-decoration:none;border-radius:8px;transition:.2s;}
+.btn:hover{background:#ff3333;}
+ul li{margin:5px 0;}
+footer{margin-top:40px;text-align:center;color:#aaa;}
+table{width:100%;border-collapse:collapse;margin-top:10px;}
+th,td{border:1px solid #333;padding:8px;text-align:left;}
+th{background:#111;color:var(--accent);}
+</style>
 </head>
+
 <body>
+
 <header class="header">
   <div class="container">
-    <div class="logo">StudyHub — Exam Prep (Offline)</div>
-    <div class="nav">
-      <a href="index.html">Αρχική</a>
-    <a href="networks.html">Networking</a>
-    <a href="standards.html" class="active">ISO / NIST</a>
-    <a href="csirt.html">CSIRT</a>
-    <a href="mock_exams.html">Mock Exams</a>
-    <a href="wireshark.html">Wireshark</a>
-    <a href="glossary.html">Glossary</a>
-    </div>
+    <div class="logo">StudyHub — Cybersecurity Exam Prep</div>
+    <nav class="nav">
+      <a href="index.html" class="active">Αρχική</a>
+      <a href="networks.html">Networking</a>
+      <a href="wireshark.html">Wireshark</a>
+      <a href="standards.html">Standards</a>
+      <a href="csirt.html">CSIRT</a>
+      <a href="mock_exams.html">Mock Exams</a>
+      <a href="glossary.html">Glossary</a>
+    </nav>
   </div>
 </header>
 
 <main class="container">
-  <div class="card">
-    <h1>Καλωσόρισες — Τι θα βρεις εδώ</h1>
-    <p>Αυτό το offline site είναι σχεδιασμένο ώστε να μπορείς να διαβάσεις αποκλειστικά από αυτό και να είσαι έτοιμος για τις εξετάσεις.</p>
-    <ul>
-      <li>Πλήρης θεωρία δικτύων (OSI, TCP/IP, subnetting, routing, switching).</li>
-      <li>Πλήρης κάλυψη standards: ISO/IEC 27001, NIST SP 800-53, και περίληψη ΚΔΠ 389/2020.</li>
-      <li>CSIRT, Incident Response, Forensics, Threat Intelligence, PenTesting.</li>
-      <li>50+ mock questions με αναλυτικές απαντήσεις.</li>
-      <li>Πρακτικά labs και παραδείγματα (Wireshark, Nmap, forensic imaging, IR playbook).</li>
-    </ul>
-    <div class="diagram">
-      <!-- OSI small svg -->
-      <svg width="100%" height="80" viewBox="0 0 800 80" xmlns="http://www.w3.org/2000/svg">
-        <rect width="100%" height="100%" fill="#021623"/>
-        <text x="12" y="22" fill="#cff0ff" font-family="Arial" font-size="12">OSI model (7 layers): Application → Presentation → Session → Transport → Network → Data Link → Physical</text>
-      </svg>
+  <section>
+    <h1>Καλώς ήρθες στο StudyHub</h1>
+    <p>
+      Ο απόλυτος οδηγός προετοιμασίας για τις εξετάσεις <strong>Cybersecurity Foundation</strong> και συναφείς πιστοποιήσεις.
+      Περιλαμβάνει πλήρες θεωρητικό υλικό, πρακτικά labs, διαγράμματα, παραδείγματα και ερωτήσεις προσομοίωσης.
+    </p>
+  </section>
+
+  <section>
+    <h2>🔸 Δομή Υλικού</h2>
+    <div class="card">
+      <ul>
+        <li><a href="networks.html" class="btn">Networking</a> — Πλήρης θεωρία TCP/IP, OSI, LAN/WAN, IPv4/IPv6, routing, firewalls.</li>
+        <li><a href="wireshark.html" class="btn">Wireshark</a> — Ανάλυση πακέτων, φίλτρα, πρακτικά παραδείγματα και ασκήσεις.</li>
+        <li><a href="standards.html" class="btn">Standards (ISO / NIST / KΔΠ)</a> — Ανάλυση προτύπων, κανονισμών και compliance.</li>
+        <li><a href="csirt.html" class="btn">CSIRT / Incident Response</a> — Διαχείριση περιστατικών, forensics, playbooks, workflows.</li>
+        <li><a href="mock_exams.html" class="btn">Mock Exams</a> — Ερωτήσεις με απαντήσεις για εξάσκηση.</li>
+        <li><a href="glossary.html" class="btn">Glossary</a> — Λεξιλόγιο όρων κυβερνοασφάλειας & δικτύων.</li>
+      </ul>
     </div>
-    <p><small>Συμβουλή μελέτης: ακολούθησε το 28-ήμερο πλάνο — ξεκίνα με Networking, συνέχισε με Standards, μετά CSIRT & Labs, τέλος Mock Exams / επανάληψη.</small></p>
-  </div>
-  <div class="footer">Άνοιξε το <strong>networks.html</strong> για να ξεκινήσεις.</div>
+  </section>
+
+  <section>
+    <h2>🧭 Πώς να μελετήσεις αποτελεσματικά</h2>
+    <div class="card">
+      <ul>
+        <li>Διάβαζε <strong>θεωρία</strong> → μετά κάνε <strong>πρακτικά παραδείγματα</strong> (Wireshark, Volatility, Autopsy).</li>
+        <li>Επανάλαβε τα βασικά <strong>πρωτόκολλα και πρότυπα</strong> (TCP/IP, ISO 27001, NIST 800-53).</li>
+        <li>Χρησιμοποίησε το <strong>Glossary</strong> καθημερινά — οι όροι εμφανίζονται συχνά στις εξετάσεις.</li>
+        <li>Κάνε <strong>Mock Exams</strong> την τελευταία εβδομάδα και αναθεώρησε τις απαντήσεις.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2>📅 28ήμερο Πρόγραμμα Μελέτης</h2>
+    <div class="card">
+      <table>
+        <tr><th>Ημέρες</th><th>Ενότητες</th></tr>
+        <tr><td>1–4</td><td>Networking fundamentals (OSI, TCP/IP, LAN/WAN, addressing)</td></tr>
+        <tr><td>5–7</td><td>Wireshark — Packet capture, filters, analysis</td></tr>
+        <tr><td>8–12</td><td>Standards — ISO 27001, NIST 800, KΔΠ 389/2020</td></tr>
+        <tr><td>13–17</td><td>CSIRT, Incident Response, Forensics process</td></tr>
+        <tr><td>18–21</td><td>Labs: Volatility, Autopsy, Cuckoo Sandbox</td></tr>
+        <tr><td>22–26</td><td>Mock Exams practice + Glossary review</td></tr>
+        <tr><td>27–28</td><td>Full revision + rest before exam</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>💡 Extra Tips</h2>
+    <div class="card">
+      <ul>
+        <li>Μάθε τις <strong>port numbers</strong> (HTTP 80, HTTPS 443, DNS 53, SSH 22).</li>
+        <li>Θυμήσου τα <strong>OSI Layers</strong> με mnemonic: “Please Do Not Throw Sausage Pizza Away”.</li>
+        <li>Κατανόησε τις <strong>διαφορές TCP vs UDP</strong> και τα πρωτόκολλα κάθε επιπέδου.</li>
+        <li>Προετοιμάσου για <strong>σενάρια Incident Response</strong> (π.χ. Phishing, Malware Infection).</li>
+        <li>Εφάρμοσε την <strong>PDCA</strong> λογική στη διαχείριση ISMS.</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    © 2025 StudyHub — Complete Cybersecurity Exam Guide<br>
+    Created for offline & GitHub Pages use. All material compiled from official standards and trusted sources.
+  </footer>
 </main>
+
 </body>
 </html>

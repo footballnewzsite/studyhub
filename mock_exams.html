@@ -1,194 +1,218 @@
 <!doctype html>
 <html lang="el">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Mock Exams — Ερωτήσεις & Απαντήσεις</title>
-<link rel="stylesheet" href="style.css"></head>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mock Exams — StudyHub</title>
+<link rel="stylesheet" href="style.css">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="alternate icon" type="image/png" href="assets/favicon.png">
+<meta property="og:image" content="assets/banner.png">
+<meta property="og:title" content="StudyHub — Cybersecurity Exam Prep">
+<meta property="og:description" content="Πλήρης οδηγός προετοιμασίας για εξετάσεις Κυβερνοασφάλειας">
+
+<style>
+:root {
+  --accent: #ff4d4d;
+}
+body {
+  background:#0d1117;
+  color:#e6e6e6;
+  font-family:"Segoe UI",sans-serif;
+  line-height:1.7;
+}
+header{background:#111;border-bottom:2px solid var(--accent);}
+.nav a.active{color:var(--accent);}
+h1,h2,h3{color:var(--accent);}
+.question{border-left:4px solid var(--accent);padding:10px 15px;margin:16px 0;background:#161b22;border-radius:8px;}
+.answer{background:#1b1f25;padding:10px 15px;border-radius:8px;border:1px solid #2a2a2a;margin-top:8px;}
+code,pre{background:#161b22;color:#fff;padding:4px 6px;border-radius:6px;}
+.exam-tip{background:#201010;border-left:5px solid var(--accent);padding:8px 12px;margin:12px 0;font-style:italic;}
+footer{margin-top:32px;text-align:center;color:#aaa;}
+</style>
+</head>
 <body>
-<header class="header"><div class="container">
-<div class="logo">StudyHub — Mock Exams</div>
-<div class="nav">
-  <a href="index.html">Αρχική</a>
-    <a href="networks.html">Networking</a>
-    <a href="standards.html" class="active">ISO / NIST</a>
-    <a href="csirt.html">CSIRT</a>
-    <a href="mock_exams.html">Mock Exams</a>
-    <a href="wireshark.html">Wireshark</a>
-    <a href="glossary.html">Glossary</a>
-</div>
-</div></header>
+
+<header class="header">
+  <div class="container">
+    <div class="logo">StudyHub — Mock Exams</div>
+    <nav class="nav">
+      <a href="index.html">Αρχική</a>
+      <a href="networks.html">Networking</a>
+      <a href="wireshark.html">Wireshark</a>
+      <a href="standards.html">Standards</a>
+      <a href="csirt.html">CSIRT</a>
+      <a href="mock_exams.html" class="active">Mock Exams</a>
+      <a href="glossary.html">Glossary</a>
+    </nav>
+  </div>
+</header>
 
 <main class="container">
   <div class="card">
-    <h1>Mock Exams — Επιλεγμένες ερωτήσεις με απαντήσεις</h1>
+    <h1>Mock Exams — Ερωτήσεις & Απαντήσεις</h1>
+    <p>Πλήρης συλλογή εξεταστικών ερωτήσεων για τα κεφάλαια: <strong>Networks, Standards, Cybersecurity, CSIRT/IR</strong>.</p>
 
-    <!-- We'll list 50 concise Q&A entries. Each has short explanation. -->
-    <h2>1–10: Networks & Protocols</h2>
+    <h2>Section 1 — Networks</h2>
 
-    <h3>Q1. Τι είναι το TCP 3-way handshake;</h3>
-    <p><strong>A:</strong> SYN → SYN-ACK → ACK. Ο client στέλνει SYN, ο server απαντά SYN-ACK, ο client κλείνει με ACK — έτσι γίνεται η εγκατάσταση της TCP σύνδεσης. Σημείο αξιολόγησης: γνώση flags, πόσο χρόνο κρατάει, και τι δείχνει ένα SYN flood (πληθώρα SYN χωρίς ολοκλήρωση).</p>
+    <div class="question">
+      <h3>Q1. Ποια είναι τα 7 επίπεδα του OSI model και ποιος είναι ο ρόλος τους;</h3>
+      <div class="answer">
+        <strong>Α:</strong> <br>
+        1. Physical – μεταφορά bits μέσω καλωδίου/σήματος <br>
+        2. Data Link – MAC addresses, frames, error detection (Ethernet) <br>
+        3. Network – IP addressing, routing (IP, ICMP) <br>
+        4. Transport – TCP/UDP, ports, reliability <br>
+        5. Session – διαχείριση συνεδριών (API sessions) <br>
+        6. Presentation – encryption, compression <br>
+        7. Application – HTTP, DNS, SMTP, FTP. <br><br>
+        <em>Παράδειγμα:</em> όταν ανοίγεις ένα site, το HTTP λειτουργεί στο Application layer, ενώ το TCP στο Transport.
+      </div>
+    </div>
 
-    <h3>Q2. Πότε χρησιμοποιούμε UDP αντί TCP;</h3>
-    <p><strong>A:</strong> Όταν απαιτείται χαμηλή καθυστέρηση & όχι υποχρεωτική αξιοπιστία — π.χ. VoIP, DNS queries, video streaming. Επιπλέον, UDP μπορεί να χρησιμοποιηθεί για amplification attacks (DNS amplification).</p>
+    <div class="question">
+      <h3>Q2. Τι διαφορά έχει το TCP από το UDP;</h3>
+      <div class="answer">
+        <strong>Α:</strong> Το TCP (Transmission Control Protocol) είναι <strong>connection-oriented</strong>, εξασφαλίζει αξιόπιστη μετάδοση και επιβεβαίωση πακέτων (ACKs).  
+        Το UDP (User Datagram Protocol) είναι <strong>connectionless</strong>, χωρίς επιβεβαίωση — γρηγορότερο αλλά λιγότερο αξιόπιστο.  
+        <em>Παράδειγμα:</em> TCP → web browsing, FTP. UDP → video streaming, DNS queries.
+      </div>
+    </div>
 
-    <h3>Q3. Πώς υπολογίζεις subnets για ένα δίκτυο /24 που θέλεις 8 subnets;</h3>
-    <p><strong>A:</strong> Χρειάζεσαι 3 bits (2^3=8) -> νέος prefix /27 (24 + 3). Κάθε /27 έχει 32 addresses (30 usable).</p>
+    <div class="question">
+      <h3>Q3. Τι είναι οι τοπολογίες δικτύου;</h3>
+      <div class="answer">
+        <strong>Α:</strong> Σχεδιαστικά πρότυπα σύνδεσης κόμβων:
+        <ul>
+          <li><strong>Bus</strong> – όλοι οι κόμβοι σε ένα κοινό καλώδιο</li>
+          <li><strong>Star</strong> – κόμβοι συνδεδεμένοι σε switch (πιο συχνή)</li>
+          <li><strong>Ring</strong> – δεδομένα κυκλικά</li>
+          <li><strong>Mesh</strong> – πολλαπλές συνδέσεις (fault tolerance)</li>
+        </ul>
+      </div>
+    </div>
 
-    <h3>Q4. Τι είναι ARP spoofing;</h3>
-    <p><strong>A:</strong> Ο επιτιθέμενος δηλώνει ψευδώς στις συσκευές ότι η MAC του αντιστοιχεί σε IP άλλου host (π.χ. gateway), επιτυγχάνοντας MITM. Αντιμετώπιση: static ARP entries, DHCP snooping, dynamic ARP inspection.</p>
+    <h2>Section 2 — Security Standards</h2>
 
-    <h3>Q5. Ποια είναι η διαφορά stateful vs stateless firewall;</h3>
-    <p><strong>A:</strong> Stateless firewall εξετάζει πακέτα μεμονωμένα (rules πάνω σε IP/port). Stateful firewall παρακολουθεί τις συνδέσεις και διατηρεί κατάσταση sessions (π.χ. επιτρέπει απαντήσεις μόνο σε established connections).</p>
+    <div class="question">
+      <h3>Q4. Ποια είναι τα βασικά σημεία του ISO/IEC 27001;</h3>
+      <div class="answer">
+        <strong>Α:</strong> Το ISO 27001 καθορίζει ένα <strong>Information Security Management System (ISMS)</strong> με τα εξής:
+        <ul>
+          <li>Risk Assessment & Treatment</li>
+          <li>Security Policies</li>
+          <li>Access Control, Cryptography, Incident Management</li>
+          <li>PDCA κύκλος (Plan–Do–Check–Act)</li>
+        </ul>
+      </div>
+    </div>
 
-    <h3>Q6. Τι είναι NAT και ποια προβλήματα δημιουργεί για forensics;</h3>
-    <p><strong>A:</strong> NAT μεταφράζει private IPs σε public — server logs βλέπουν μόνο τη public IP, δυσκολεύεται ο εντοπισμός συγκεκριμένου host πίσω από NAT χωρίς επιπλέον logs (NAT table, timestamps).</p>
+    <div class="question">
+      <h3>Q5. Τι είναι η Απόφαση ΚΔΠ 389/2020;</h3>
+      <div class="answer">
+        <strong>Α:</strong> Κυπριακή νομοθεσία για την <strong>κυβερνοασφάλεια κρίσιμων υποδομών</strong>.  
+        Καθορίζει υποχρεώσεις οργανισμών για:
+        <ul>
+          <li>Αναφορά περιστατικών σε CSIRT-CY</li>
+          <li>Εφαρμογή ISO 27001 / NIST standards</li>
+          <li>Ορισμό Υπευθύνου Ασφάλειας Πληροφοριών</li>
+        </ul>
+      </div>
+    </div>
 
-    <h3>Q7. Εξηγείστε το concept VLAN;</h3>
-    <p><strong>A:</strong> VLANs διαχωρίζουν λογικά την κυκλοφορία στο layer 2. Ορισμός: κάθε VLAN είναι ένα broadcast domain. VLAN trunking (802.1Q) επιτρέπει πολλαπλά VLANs σε ένα φυσικό σύνδεσμο.</p>
+    <div class="question">
+      <h3>Q6. Ποιες είναι οι 5 λειτουργίες του NIST Cybersecurity Framework;</h3>
+      <div class="answer">
+        <strong>Α:</strong> Identify, Protect, Detect, Respond, Recover.  
+        <em>Παράδειγμα:</em> Detect = SIEM monitoring, Respond = Incident Response plan.
+      </div>
+    </div>
 
-    <h3>Q8. Πότε βλέπεις fragmented IP packets; τι πρέπει να γνωρίζεις;</h3>
-    <p><strong>A:</strong> Όταν το MTU του μονοπατιού είναι μικρότερο από το μέγεθος του IP packet — fragment reassembly μπορεί να χρησιμοποιηθεί από attackers για evasion. Παρακολούθηση και σωστή MTU setting/PMTU helps.</p>
+    <h2>Section 3 — CSIRT / Incident Response</h2>
 
-    <h3>Q9. Τι είναι DNS cache poisoning;</h3>
-    <p><strong>A:</strong> Εισαγωγή ψευδών DNS records σε cache resolver, ώστε να ανακατευθύνει clients σε malicious IPs. Mitigations: DNSSEC, use of authenticated resolvers.</p>
+    <div class="question">
+      <h3>Q7. Ποια είναι τα στάδια του Incident Response Lifecycle;</h3>
+      <div class="answer">
+        <strong>Α:</strong> Preparation → Detection & Analysis → Containment, Eradication & Recovery → Post-Incident Activity.  
+        <em>Tip:</em> αποστήθισε τη σειρά — είναι συχνή ερώτηση.
+      </div>
+    </div>
 
-    <h3>Q10. Ποια εργαλεία χρησιμοποίησες για network analysis;</h3>
-    <p><strong>A:</strong> Wireshark (packet analysis), tcpdump, nmap (scanning), netcat (tcp testing), traceroute, ss/netstat.</p>
+    <div class="question">
+      <h3>Q8. Ποια εργαλεία χρησιμοποιούνται στο IR;</h3>
+      <div class="answer">
+        <ul>
+          <li><strong>Volatility</strong> – Memory analysis</li>
+          <li><strong>Autopsy</strong> – Disk forensic</li>
+          <li><strong>Cuckoo Sandbox</strong> – Malware analysis</li>
+          <li><strong>SIEM</strong> – Detection & correlation</li>
+          <li><strong>Wireshark</strong> – Network capture</li>
+        </ul>
+      </div>
+    </div>
 
-    <hr/>
+    <div class="question">
+      <h3>Q9. Πώς συλλέγεις αποδεικτικά δεδομένα;</h3>
+      <div class="answer">
+        <strong>Α:</strong> Με τη μέθοδο <strong>forensic acquisition</strong> — δηλαδή αντιγραφή χωρίς αλλοίωση:
+        <pre>dd if=/dev/sda of=evidence.dd bs=4M conv=noerror,sync</pre>
+        και καταγραφή hash με <code>sha256sum</code>.  
+        <em>Σημαντικό:</em> πάντα κρατάς chain of custody log.
+      </div>
+    </div>
 
-    <h2>11–20: Security Principles & Standards</h2>
+    <div class="question">
+      <h3>Q10. Ποια είναι η διαφορά Threat Intelligence και Vulnerability Assessment;</h3>
+      <div class="answer">
+        <strong>Α:</strong> 
+        <ul>
+          <li><strong>Threat Intelligence:</strong> ανάλυση εξωτερικών απειλών, TTPs, IOCs, MITRE ATT&CK.</li>
+          <li><strong>Vulnerability Assessment:</strong> εσωτερικός έλεγχος για αδύναμα σημεία (Nessus, OpenVAS).</li>
+        </ul>
+      </div>
+    </div>
 
-    <h3>Q11. Τι είναι το ISMS;</h3>
-    <p><strong>A:</strong> Information Security Management System — σύστημα διαχείρισης ασφάλειας πληροφοριών, περιλαμβάνει πολιτικές, διαδικασίες, ρόλους, risk assessment, controls βάσει ISO 27001.</p>
+    <div class="question">
+      <h3>Q11. Πότε γίνεται “lessons learned” meeting;</h3>
+      <div class="answer">
+        <strong>Α:</strong> Μετά το recovery — συνήθως εντός 7 ημερών.  
+        Στόχος: καταγραφή root cause και βελτίωση IR plan.
+      </div>
+    </div>
 
-    <h3>Q12. Εξηγήστε PDCA στο πλαίσιο ISMS;</h3>
-    <p><strong>A:</strong> Plan: ορισμός scope & risk assessment. Do: εφαρμογή controls. Check: audits, monitoring, vulnerability scans. Act: διορθώσεις & βελτιώσεις.</p>
+    <h2>Section 4 — Practical Scenarios</h2>
 
-    <h3>Q13. Ποια είναι μερικά σημαντικά controls του Annex A (ISO 27001);</h3>
-    <p><strong>A:</strong> Access control (A.9), Cryptography (A.10), Operations security (A.12), Business continuity (A.17), Supplier relationships (A.15).</p>
+    <div class="question">
+      <h3>Scenario 1: Phishing Incident</h3>
+      <div class="answer">
+        <strong>Βήματα:</strong>
+        <ol>
+          <li>Isolate suspicious email</li>
+          <li>Extract headers με Outlook Message Header Analyzer</li>
+          <li>Check URLs με <code>urlscan.io</code></li>
+          <li>Notify users & block domain</li>
+        </ol>
+      </div>
+    </div>
 
-    <h3>Q14. Τι είναι NIST SP 800-53;</h3>
-    <p><strong>A:</strong> Κατάλογος ελέγχων για κυβερνητικά συστήματα, οργανωμένος σε families (AC, IA, AU, IR, SI κ.ά.) — χρησιμεύει ως blueprint για τεχνική εφαρμογή controls.</p>
+    <div class="question">
+      <h3>Scenario 2: Ransomware Infection</h3>
+      <div class="answer">
+        <ol>
+          <li>Disconnect infected host</li>
+          <li>Acquire memory & disk image</li>
+          <li>Identify ransomware note and hash sample</li>
+          <li>Restore from offline backup</li>
+          <li>Report to CSIRT-CY</li>
+        </ol>
+      </div>
+    </div>
 
-    <h3>Q15. Πώς θα χαρτογραφήσεις ISO Annex A σε NIST controls;</h3>
-    <p><strong>A:</strong> Παράδειγμα: ISO A.9 (Access Control) ↔ NIST AC-1/AC-2/AC-17. Χάρτο με πίνακα για συχνές αντιστοιχίσεις (use vendor mapping documents).</p>
-
-    <h3>Q16. Τι προβλέπει η ΚΔΠ 389/2020 (σύντομα);</h3>
-    <p><strong>A:</strong> Απαιτεί οργανωτικά & τεχνικά μέτρα, risk assessments, και notification στην Αρχή για σημαντικά incidents — εφαρμόζεται σε συγκεκριμένους φορείς (ελέγξτε κείμενο για λεπτομέρειες).</p>
-
-    <h3>Q17. Τι είναι RTO και RPO;</h3>
-    <p><strong>A:</strong> RTO (Recovery Time Objective) = πόσο γρήγορα πρέπει να ανακάμψει υπηρεσία. RPO (Recovery Point Objective) = πόσο δεδομένα είναι αποδεκτό να χαθούν (παράδειγμα: 1 hour RPO).</p>
-
-    <h3>Q18. Πώς μετράς MTTR;</h3>
-    <p><strong>A:</strong> Mean Time To Repair/Restore — average time to remediate incidents. Μειώνεται με αυτοματισμούς, καλά σχέδια IR και DR tests.</p>
-
-    <h3>Q19. Τι είναι risk acceptance vs risk mitigation;</h3>
-    <p><strong>A:</strong> Acceptance = αποδοχή του κινδύνου χωρίς ενέργεια (συνήθως μικρή πιθανότητα/impact). Mitigation = εφαρμογή controls για μείωση πιθανότητας/impact.</p>
-
-    <h3>Q20. Τι είναι third-party risk;</h3>
-    <p><strong>A:</strong> Κίνδυνος που σχετίζεται με προμηθευτές/outsourcers — απαιτεί due diligence, SLA security clauses, vendor assessments.</p>
-
-    <hr/>
-
-    <h2>21–35: CSIRT / IR / Forensics</h2>
-
-    <h3>Q21. Περιγράψτε σύντομα το IR playbook για data exfiltration alert.</h3>
-    <p><strong>A:</strong> (1) Triage: verify SIEM alerts, check netflow/PCAP; (2) Contain: isolate hosts, block IPs; (3) Forensic capture: disk & memory image, logs; (4) Eradicate: remove backdoors; (5) Recover & notify; (6) Lessons learned.</p>
-
-    <h3>Q22. Τι συλλέγεις σε live response;</h3>
-    <p><strong>A:</strong> Running processes, network connections (netstat/ss), open files, user sessions, WMI/registry info, volatile memory dump (if necessary and planned).</p>
-
-    <h3>Q23. Πώς παίρνεις forensic disk image;</h3>
-    <p><strong>A:</strong> Use write-blocker or boot from forensic media, create bit-for-bit image with dd/FTK Imager, compute MD5/SHA256 checksum for source & image.</p>
-
-    <h3>Q24. Τι είναι timeline analysis;</h3>
-    <p><strong>A:</strong> Συγκεντρώνεις timestamps από logs, MFT, registry, browser artifacts και κατασκευάζεις χρονολόγιο (tools: Plaso/log2timeline, Timesketch).</p>
-
-    <h3>Q25. Ποια είναι τα βασικά στοιχεία στο forensic report;</h3>
-    <p><strong>A:</strong> Methodology, tools & versions, hashes, findings (IOCs), timeline, conclusions, evidence chain of custody.</p>
-
-    <h3>Q26. Τι είναι MITRE ATT&CK; πώς το χρησιμοποιείς;</h3>
-    <p><strong>A:</strong> Knowledge base of adversary tactics & techniques. Χαρτογράφησε παρατηρούμενα TTPs σε ATT&CK για detection & hunting rules.</p>
-
-    <h3>Q27. Διαφορά vulnerability assessment vs penetration test;</h3>
-    <p><strong>A:</strong> VA = inventory & scanning — list of vulnerabilities (non-exploitative). PenTest = exploit to demonstrate real impact (scoped, authorized).</p>
-
-    <h3>Q28. Τι είναι IOC και πώς το μοιράζεσαι;</h3>
-    <p><strong>A:</strong> Indicator of Compromise: IPs, domains, file hashes. Share via TI feeds (STIX/TAXII), vendor portals, or internal TI platforms.</p>
-
-    <h3>Q29. Ποια logs είναι σημαντικά για investigation;</h3>
-    <p><strong>A:</strong> Endpoint logs (EDR), Windows Event Logs, syslog, proxy logs, firewall logs, application logs, netflow/PCAP.</p>
-
-    <h3>Q30. Πώς διεξάγεις malware static analysis;</h3>
-    <p><strong>A:</strong> Hashing, strings, PE header inspection, imports, packers; use tools: VirusTotal, PEStudio, Ghidra for reverse engineering.</p>
-
-    <h3>Q31. Τι είναι EDR; γιατί είναι σημαντικό;</h3>
-    <p><strong>A:</strong> Endpoint Detection & Response — agent-based monitoring for detection, response (process trees, rollback, isolation). Επιτρέπει γρήγορη παρακολούθηση & containment.</p>
-
-    <h3>Q32. Τι ενέργειες κάνεις μετά από phishing incident;</h3>
-    <p><strong>A:</strong> Identify affected users, reset creds, scan for web shells/malware, block malicious sender/domain, notify users, run phishing awareness training.</p>
-
-    <h3>Q33. Πώς εκτιμάται impact data breach;</h3>
-    <p><strong>A:</strong> Identify type of data (PII, financial, IP), number of records, sensitivity; legal & regulatory obligations (notification thresholds).</p>
-
-    <h3>Q34. Τι περιλαμβάνει threat hunting session;</h3>
-    <p><strong>A:</strong> Hypothesis generation, collect relevant logs, use TI & ATT&CK mappings, search for anomalous behaviors, create detections.</p>
-
-    <h3>Q35. Πώς χειρίζεσαι evidence custody;</h3>
-    <p><strong>A:</strong> Document all handlers, timestamps, storage location, maintain write protection, compute & store hashes, sign chain of custody forms.</p>
-
-    <hr/>
-
-    <h2>36–50: Practical & Policies</h2>
-
-    <h3>Q36. Δώστε policy example για Access Control (κύρια σημεία);</h3>
-    <p><strong>A:</strong> Purpose, Scope, Roles & responsibilities, Authentication (MFA), Authorization (RBAC), Account provisioning & deprovisioning, periodic review, logging & monitoring.</p>
-
-    <h3>Q37. Τι είναι backup rotation (3-2-1 rule);</h3>
-    <p><strong>A:</strong> 3 copies of data, on 2 different media, 1 offsite. Έτσι μειώνεται ο κίνδυνος απώλειας από καταστροφή ή ransomware.</p>
-
-    <h3>Q38. Πώς γράφεις post-incident report;</h3>
-    <p><strong>A:</strong> Executive summary, timeline, root cause, remediation steps, affected systems, data impact, recommendations, lessons learned, attachments (hashes, logs).</p>
-
-    <h3>Q39. Τι περιλαμβάνει vulnerability management lifecycle;</h3>
-    <p><strong>A:</strong> Discover assets, scan, prioritize by risk/impact, patch/mitigate, validate, report & metrics.</p>
-
-    <h3>Q40. Πώς σχεδιάζεις tabletop exercise;</h3>
-    <p><strong>A:</strong> Define scenario (e.g. ransomware), participants, injects, objectives, measure response timeline, conduct debrief, update playbooks.</p>
-
-    <h3>Q41. Τι είναι SIEM correlation rule;</h3>
-    <p><strong>A:</strong> Συνδυασμός πολλαπλών events για να δημιουργήσει alert (π.χ. login failure spikes + new process execution => potential compromise).</p>
-
-    <h3>Q42. Τι περιλαμβάνει penetration testing report;</h3>
-    <p><strong>A:</strong> Scope, methodologies, findings ranked by severity, proof-of-concept, remediation guidance, evidence (screenshots, commands).</p>
-
-    <h3>Q43. Πώς ανιχνεύεις lateral movement;</h3>
-    <p><strong>A:</strong> Monitor for unusual SMB/WinRM/RDP activity, new admin tools launched, account usage from new hosts; use EDR telemetry & netflow.</p>
-
-    <h3>Q44. Τι είναι data exfiltration και πώς τη σταματάς;</h3>
-    <p><strong>A:</strong> Exfiltration = unauthorized data transfer out. Stop: block channels (FTP, cloud uploads), DLP controls, network segmentation, block suspicious destinations.</p>
-
-    <h3>Q45. Πώς ελέγχεις για persistence mechanisms;</h3>
-    <p><strong>A:</strong> Look for autoruns, scheduled tasks, services, suspicious registry entries, WMI persistence, DLL side-loading.</p>
-
-    <h3>Q46. Τι είναι YARA rule;</h3>
-    <p><strong>A:</strong> Pattern matching rules to identify malware families based on strings/bytes/metadata — use in memory/disk scans.</p>
-
-    <h3>Q47. Πώς δημιουργείς detection για Ransomware;</h3>
-    <p><strong>A:</strong> Monitor for mass file renaming, rapid file writes, high CPU/ciphering processes, creation of ransom notes — create SIEM correlations & EDR rules.</p>
-
-    <h3>Q48. Ποια είναι τα κρίσιμα στοιχεία σε forensic timeline;</h3>
-    <p><strong>A:</strong> File modified/created timestamps, process execution times, login times, network connections, scheduled tasks, registry changes.</p>
-
-    <h3>Q49. Πώς αξιολογείς exfiltrated data impact;</h3>
-    <p><strong>A:</strong> Identify type of data, regulatory impact (GDPR), customers affected, business impact, reputation & financial costs.</p>
-
-    <h3>Q50. Τι πρέπει να περιλαμβάνει μια προετοιμασία CSIRT playbook;</h3>
-    <p><strong>A:</strong> Contact list, escalation matrix, IR steps per incident type, forensic procedures, communication templates (internal/external), testing schedule.</p>
+    <div class="exam-tip">
+      💡 <strong>Exam Tip:</strong> Να μπορείς να περιγράψεις για κάθε τύπο περιστατικού: detection → containment → recovery → reporting.
+    </div>
 
   </div>
-
-  <div class="footer">Θες να σου φτιάξω 100+ ερωτήσεις; Πες μου και τις προσθέτω.</div>
 </main>
 </body>
 </html>

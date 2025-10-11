@@ -3,327 +3,219 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>CSIRT / Incident Response / Forensics — Αναλυτικά</title>
-
-<!-- load common stylesheet (place this file in same folder with style.css) -->
+<title>CSIRT / Incident Response — StudyHub</title>
 <link rel="stylesheet" href="style.css">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="alternate icon" type="image/png" href="assets/favicon.png">
+<meta property="og:image" content="assets/banner.png">
+<meta property="og:title" content="StudyHub — Cybersecurity Exam Prep">
+<meta property="og:description" content="Πλήρης οδηγός προετοιμασίας για εξετάσεις Κυβερνοασφάλειας">
 
-<!-- override accent for "security look" (red accent) -->
 <style>
-:root{ --accent: #ff4d4f; } 
-/* small tweaks for code blocks in this page */
-.card pre { background:#1b0b0b; color:#ffdcdc; }
-.diagram { border:1px solid rgba(255,77,79,0.06); }
-.note { background: rgba(255,77,79,0.03); padding:10px; border-radius:8px; margin:8px 0; }
-.kv { font-weight:700; color:#ffdcdc; }
+:root {
+  --accent: #ff4d4d;
+}
+body {
+  background:#0d1117;
+  color:#e6e6e6;
+  font-family:"Segoe UI",sans-serif;
+  line-height:1.7;
+}
+header{background:#111;border-bottom:2px solid var(--accent);}
+.nav a.active{color:var(--accent);}
+h1,h2,h3{color:var(--accent);}
+code,pre{background:#161b22;color:#fff;padding:4px 6px;border-radius:6px;}
+.table{border-collapse:collapse;width:100%;margin-top:12px;}
+.table th,.table td{border:1px solid #333;padding:8px;}
+.diagram svg{max-width:100%;display:block;margin:auto;}
+ul.checklist li::before{content:"✓ ";color:var(--accent);}
 </style>
 </head>
 <body>
-<header class="header"><div class="container">
-  <div class="logo">StudyHub — CSIRT & Incident Response</div>
-  <div class="nav">
-    <a href="index.html">Αρχική</a>
-    <a href="networks.html">Networking</a>
-    <a href="standards.html" class="active">ISO / NIST</a>
-    <a href="csirt.html">CSIRT</a>
-    <a href="mock_exams.html">Mock Exams</a>
-    <a href="wireshark.html">Wireshark</a>
-    <a href="glossary.html">Glossary</a>
+
+<header class="header">
+  <div class="container">
+    <div class="logo">StudyHub — CSIRT / Incident Response</div>
+    <nav class="nav">
+      <a href="index.html">Αρχική</a>
+      <a href="networks.html">Networking</a>
+      <a href="wireshark.html">Wireshark</a>
+      <a href="standards.html">Standards</a>
+      <a href="csirt.html" class="active">CSIRT</a>
+      <a href="mock_exams.html">Mock Exams</a>
+      <a href="glossary.html">Glossary</a>
+    </nav>
   </div>
-</div></header>
+</header>
 
 <main class="container">
   <div class="card">
-    <h1>CSIRT — Incident Response, Forensics & Threat Intelligence</h1>
 
-    <h2>Εισαγωγή — τι είναι CSIRT / SOC / CERT</h2>
+    <h1>CSIRT / Incident Response — Πλήρης Οδηγός</h1>
+
     <p>
-      <strong>CSIRT</strong> (Computer Security Incident Response Team) είναι η οργανωμένη ομάδα που διαχειρίζεται
-      περιστατικά ασφάλειας (incidents). Συνήθως περιλαμβάνει roles όπως Incident Handler, Forensic Analyst,
-      Threat Intelligence Analyst, Communications/PR, και Liaison (επαφή με εξωτερικούς φορείς/CERTs).
-    </p>
-    <p>
-      <strong>SOC</strong> (Security Operations Center) είναι το κέντρο λειτουργιών που κάνει 24/7 monitoring (SIEM, EDR).
-      <strong>CERT</strong> / <strong>CSIRT</strong> συχνά συνεργάζονται — το πρώτο μπορεί να είναι εθνικό/εξωτερικό.
+      Το <strong>Computer Security Incident Response Team (CSIRT)</strong> είναι η ομάδα υπεύθυνη για την αντιμετώπιση και διαχείριση περιστατικών ασφάλειας πληροφορικής.
+      Στόχος της είναι η <strong>έγκαιρη ανίχνευση, ανάλυση, περιορισμός και αποκατάσταση</strong> μετά από κυβερνοσυμβάντα.
     </p>
 
-    <h2>Incident Response Lifecycle — Αναλυτικά (IR)</h2>
-    <div class="diagram" aria-hidden="true">
-      <!-- IR lifecycle SVG -->
-      <svg width="100%" height="160" viewBox="0 0 900 160" xmlns="http://www.w3.org/2000/svg">
-        <rect width="100%" height="100%" fill="#081015"/>
-        <g font-family="Arial" font-size="12" fill="#ffdcdc">
-          <circle cx="120" cy="50" r="36" fill="#7a1f1f"/><text x="96" y="54">Preparation</text>
-          <circle cx="300" cy="50" r="36" fill="#9f2b2b"/><text x="274" y="54">Detection</text>
-          <circle cx="480" cy="50" r="36" fill="#c43a3a"/><text x="462" y="54">Containment</text>
-          <circle cx="660" cy="50" r="36" fill="#ff4d4f"/><text x="640" y="54">Eradication</text>
-          <circle cx="420" cy="120" r="36" fill="#ff706b"/><text x="400" y="124">Recovery</text>
-          <circle cx="240" cy="120" r="36" fill="#ff8a82"/><text x="222" y="124">Lessons</text>
+    <h2>1. Ρόλος και Αρμοδιότητες CSIRT</h2>
+    <ul>
+      <li>Παρακολούθηση και ανίχνευση περιστατικών (monitoring & detection)</li>
+      <li>Ανάλυση απειλών (threat analysis)</li>
+      <li>Ανταπόκριση και αποκατάσταση (response & recovery)</li>
+      <li>Συνεργασία με εθνικούς/διεθνείς φορείς (ENISA, CSIRT-CY, CERT-EU)</li>
+      <li>Εκπαίδευση προσωπικού και awareness</li>
+    </ul>
 
-          <path d="M156 50 Q210 10 258 50" stroke="#ff8a82" stroke-width="2" fill="none"/>
-          <path d="M336 50 Q420 10 456 50" stroke="#ff8a82" stroke-width="2" fill="none"/>
-          <path d="M516 50 Q600 10 642 50" stroke="#ff8a82" stroke-width="2" fill="none"/>
-          <path d="M620 68 Q480 140 360 110" stroke="#ff8a82" stroke-width="2" fill="none"/>
-        </g>
+    <h2>2. Incident Response Lifecycle (NIST SP 800-61r2)</h2>
+
+    <div class="diagram">
+      <svg viewBox="0 0 600 200">
+        <circle cx="100" cy="100" r="45" fill="#ff4d4d"/><text x="70" y="105" fill="#fff" font-size="14">Preparation</text>
+        <circle cx="250" cy="100" r="45" fill="#ff4d4d"/><text x="215" y="105" fill="#fff" font-size="14">Detection</text>
+        <circle cx="400" cy="100" r="45" fill="#ff4d4d"/><text x="360" y="105" fill="#fff" font-size="14">Containment</text>
+        <circle cx="550" cy="100" r="45" fill="#ff4d4d"/><text x="520" y="105" fill="#fff" font-size="14">Recovery</text>
       </svg>
     </div>
 
-    <h3>1) Preparation</h3>
-    <p>
-      Προετοιμασία = policies, playbooks, επικοινωνιακά κανάλια, training, backups, asset inventory, logging & retention policy.
-      Επίσης: καθορισμός severity levels (Low / Medium / High / Critical) και escalation matrix.
-    </p>
-    <div class="note">
-      <span class="kv">Tip:</span> Έχε πάντα ένα “IR kit” (forensic USB, write-blocker, checklist, contact list legal/PR).
-    </div>
-
-    <h3>2) Detection & Analysis</h3>
-    <p>
-      Πηγές ανίχνευσης: SIEM alerts, EDR alerts, IDS/IPS, user reports, network anomalies (NetFlow), external TI feeds.
-      H triage φάση περιλαμβάνει: validation του alert, determination of scope, identification of IOCs (IPs, hashes, domains).
-    </p>
-
-    <h3>3) Containment</h3>
-    <p>
-      Short-term containment: isolate host (network quarantine, NAC), block malicious IPs at firewall, stop malicious processes.
-      Long-term containment: apply patches, rotate credentials, segment network, remove persistence mechanisms.
-    </p>
-
-    <h3>4) Eradication</h3>
-    <p>
-      Αφαίρεση root cause: cleaning malware, removing backdoors, κλείσιμο ευπαθειών. Πριν την επαναφορά επιβεβαίωση ότι όλα τα artifacts έχουν εξαφανιστεί.
-    </p>
-
-    <h3>5) Recovery</h3>
-    <p>
-      Επαναφορά υπηρεσιών από clean backups, ενισχυμένος monitoring, gradual return online με validation tests.
-    </p>
-
-    <h3>6) Lessons Learned</h3>
-    <p>
-      Post-incident review: timeline, root cause analysis, επιπλέον controls, ενημέρωση playbook, training. Τεκμηρίωση όλων — αποτελεί σημαντικό κομμάτι για auditor/insurance claims.
-    </p>
-
-    <hr/>
-
-    <h2>Forensics — complete workflow & practical steps</h2>
-    <p>Digital Forensics = συστηματική συλλογή, διατήρηση & ανάλυση ψηφιακών αποδεικτικών (evidence) με σεβασμό στην αλυσίδα custody (chain of custody).</p>
-
-    <h3>Βασικά βήματα Forensics (practical)</h3>
     <ol>
-      <li><strong>Initial response & documentation:</strong> record who, when, system state, screenshots.</li>
-      <li><strong>Volatile data collection (live response):</strong> running processes, network connections (netstat/ss), open files, memory dump (if needed).</li>
-      <li><strong>Imaging:</strong> create bit-for-bit disk image (dd if=/dev/sdX of=/mnt/evidence/image.E01 or use FTK Imager), use write-blocker for physical drives.</li>
-      <li><strong>Hashing:</strong> compute SHA256/MD5 for source & image — αποθηκεύστε checksums.</li>
-      <li><strong>Log collection:</strong> system logs, application logs, proxy logs, nginx/IIS logs, firewall logs, netflow.</li>
-      <li><strong>Analysis:</strong> timeline creation (Plaso/log2timeline, Timesketch), file carving, artifact analysis (browser history, registry).</li>
-      <li><strong>Report & custody:</strong> prepare forensic report, document chain of custody, store evidence securely.</li>
+      <li><strong>Preparation</strong> – Πολιτικές, IR plan, training, εργαλεία (SIEM, forensic kits)</li>
+      <li><strong>Detection & Analysis</strong> – Αναγνώριση περιστατικού, συλλογή logs, alerts</li>
+      <li><strong>Containment, Eradication, Recovery</strong> – Περιορισμός, καθαρισμός, αποκατάσταση</li>
+      <li><strong>Post-Incident Activity</strong> – Lessons learned, βελτίωση διαδικασιών</li>
     </ol>
 
-    <h3>Live response commands (Windows example)</h3>
-    <pre>
-# Run as Administrator
-tasklist /fo csv > C:\ir\running_processes.csv
-netstat -ano > C:\ir\netstat.txt
-wmic useraccount get name,sid > C:\ir\users.txt
-reg export "HKLM\SYSTEM" C:\ir\system_hive.reg
-# Memory capture example (use with caution)
-pslist &gt; C:\ir\pslist.txt
-procdump -ma &lt;pid&gt; C:\ir\proc_dump.dmp
-    </pre>
-    <small>Προειδοποίηση: Live memory capture αλλάζει την κατάσταση του συστήματος — ακολουθήστε playbook για forensic integrity.</small>
-
-    <h3>Disk imaging commands (Linux)</h3>
-    <pre>
-# Using dd with hashing
-dd if=/dev/sdb bs=4M conv=sync,noerror | tee /mnt/evidence/image.dd | sha256sum > /mnt/evidence/image.sha256
-# Better: use ewfacquire/guymager/FTK Imager for E01 + metadata
-    </pre>
-
-    <h3>Evidence handling — Chain of Custody (template)</h3>
-    <pre>
-Evidence ID: EVID-2025-001
-Description: Disk from host-123 (C: 500GB)
-Collected by: Name, role
-Date/Time collected: 2025-10-11 10:12 UTC+2
-Hash (source): SHA256: <...>
-Hash (image): SHA256: <...>
-Storage location: Secure evidence locker (encrypted)
-Handlers:
-- Name1 (date/time)
-- Name2 (date/time)
-    </pre>
-
-    <hr/>
-
-    <h2>Threat Intelligence (TI) — Cycle & Levels</h2>
-    <p>Threat Intelligence = συλλογή, επεξεργασία & ανάλυση πληροφοριών για απειλές με σκοπό βελτιωμένη ανίχνευση και προστασία.</p>
-
-    <h3>TI Levels</h3>
-    <ul>
-      <li><strong>Strategic:</strong> υψηλού επιπέδου (C-level) — τάσεις, πολιτικές απειλών.</li>
-      <li><strong>Operational:</strong> campaign-level info (π.χ. APT group targeting sector X).</li>
-      <li><strong>Tactical:</strong> TTPs — τεχνικές και διαδικασίες που χρησιμοποιεί ο επιτιθέμενος.</li>
-      <li><strong>Technical:</strong> IOCs — IPs, domains, hashes (used for detection rules).</li>
-    </ul>
-
-    <h3>TI Cycle (Analytic) — SVG</h3>
-    <div class="diagram" aria-hidden="true">
-      <svg width="100%" height="120" viewBox="0 0 900 120" xmlns="http://www.w3.org/2000/svg">
-        <rect width="100%" height="100%" fill="#081015"/>
-        <text x="20" y="24" fill="#ffdcdc" font-family="Arial" font-size="12">1. Collection → 2. Processing → 3. Analysis → 4. Dissemination → 5. Feedback</text>
-      </svg>
-    </div>
-
-    <h3>Παραδείγματα TI sources</h3>
-    <ul>
-      <li>Open-source feeds: VirusTotal, AbuseIPDB, OTX</li>
-      <li>Commercial feeds: vendor TI subscriptions</li>
-      <li>Internal telemetry: EDR logs, firewall logs, SIEM</li>
-      <li>Information sharing: ISACs, national CERTs</li>
-    </ul>
-
-    <hr/>
-
-    <h2>Malware Analysis — Basics (Static & Dynamic)</h2>
-    <h3>Static analysis</h3>
-    <ul>
-      <li>Hashing (SHA256), strings, PE header analysis, imports/exports</li>
-      <li>Tools: PEStudio, rizin/cutter, Ghidra</li>
-    </ul>
-    <h3>Dynamic analysis</h3>
-    <ul>
-      <li>Execute in sandbox/VM with no network or controlled fake network, monitor behavior</li>
-      <li>Tools: Cuckoo sandbox, Procmon, Wireshark, sysmon logs</li>
-    </ul>
-
-    <hr/>
-
-    <h2>Penetration Testing & Vulnerability Assessment — Methodology</h2>
-    <h3>Vulnerability Assessment (VA)</h3>
-    <p>Σκοπός: εντοπισμός ευπαθειών, κατάλογος & αξιολόγηση risk (non-exploitative). Εργαλεία: Nessus, OpenVAS, Qualys.</p>
-
-    <h3>Penetration Testing (PT)</h3>
-    <p>Σκοπός: πραγματική προσπάθεια εκμετάλλευσης για να αποδειχθεί impact — απαιτεί scoping, rules of engagement, και σαφή authorization.</p>
-
-    <h3>Common PT phases (OSSTMM/OWASP-inspired)</h3>
-    <ol>
-      <li>Reconnaissance (passive & active)</li>
-      <li>Enumeration (ports, services)</li>
-      <li>Exploitation (gain initial access)</li>
-      <li>Post-exploitation (persistence, privilege escalation, lateral movement)</li>
-      <li>Reporting (findings, PoC, remediation)</li>
-    </ol>
-
-    <h3>CVSS & Prioritization</h3>
-    <p>CVSS (Common Vulnerability Scoring System) βοηθά στην αξιολόγηση severity (base, temporal, environmental scores). Χρησιμοποιείται για prioritization του remediation.</p>
-
-    <hr/>
-
-    <h2>Tools — Practical quick reference</h2>
+    <h2>3. Incident Classification</h2>
     <table class="table">
-      <tr><th>Tool</th><th>Use</th></tr>
-      <tr><td>Wireshark / tcpdump</td><td>Packet capture & analysis</td></tr>
-      <tr><td>FTK Imager / Guymager</td><td>Disk imaging</td></tr>
-      <tr><td>Autopsy / Sleuthkit / Plaso</td><td>Forensic analysis & timeline</td></tr>
-      <tr><td>Volatility</td><td>Memory analysis</td></tr>
-      <tr><td>Nessus / OpenVAS</td><td>Vulnerability scanning</td></tr>
-      <tr><td>Metasploit</td><td>Penetration testing framework</td></tr>
-      <tr><td>EDR (CrowdStrike, SentinelOne)</td><td>Endpoint detection & response</td></tr>
+      <tr><th>Τύπος Συμβάντος</th><th>Παράδειγμα</th></tr>
+      <tr><td>Malware Infection</td><td>Ransomware, Trojan, Worm</td></tr>
+      <tr><td>Unauthorized Access</td><td>Compromised account ή privilege escalation</td></tr>
+      <tr><td>Data Breach</td><td>Διαρροή προσωπικών δεδομένων</td></tr>
+      <tr><td>DoS/DDoS</td><td>Επίθεση άρνησης υπηρεσίας</td></tr>
+      <tr><td>Phishing/Social Engineering</td><td>Fake emails ή credential harvesting</td></tr>
     </table>
 
-    <hr/>
+    <h2>4. Preparation — Incident Response Plan</h2>
+    <ul class="checklist">
+      <li>IR Policy εγκεκριμένη από Management</li>
+      <li>Defined escalation paths</li>
+      <li>Contact list (IT, Legal, Management, CSIRT-CY)</li>
+      <li>Incident severity matrix</li>
+      <li>IR Kits: forensic USBs, write blockers, collection scripts</li>
+    </ul>
 
-    <h2>Case Study — Phishing → Credential Compromise (practical)</h2>
-    <p>
-      Σενάριο: χρήστης αναφέρει ύποπτο email με link. Ακολουθούμε playbook:
-    </p>
-    <ol>
-      <li>Collect email headers, message source, suspicious URL (save as evidence).</li>
-      <li>Check URL in sandbox / VirusTotal / passive DNS.</li>
-      <li>If user clicked & entered creds: reset credentials, check other logins, enable MFA if absent.</li>
-      <li>Search for lateral movement: atypical logons, new admin tools, suspicious RDP/SMB activity.</li>
-      <li>If malware found: isolate host, image disk, analyze, eradicate, restore from clean backup.</li>
-    </ol>
-
-    <hr/>
-
-    <h2>IR Reporting — Template & Example (detailed)</h2>
+    <h3>Δείγμα Πολιτικής (απλό απόσπασμα)</h3>
     <pre>
-Incident Report (detailed):
-- Incident ID: IR-2025-001
-- Detection time: 2025-10-11 09:12
-- Detection source: SIEM rule X (malicious process Y detected by EDR)
-- Affected assets: host-123 (Windows Server), db-prod-01
-- Initial scope: 3 hosts
-- Root cause (initial): compromised service account via credential stuffing
-- Containment actions: quarantined host-123 on VLAN 99, blocked IPs A.B.C.D on perimeter firewall, rotated service account creds
-- Forensic actions: memory dump (volatility), disk image (image.E01), timeline created (Plaso)
-- Recovery: restore from backup dated 2025-10-09, validation checks OK
-- Notifications: internal IT, legal, regulator (if required)
-- Lessons & remediation: enforce MFA, patch cadence to 7 days for critical, enable EDR on all servers
+Purpose: To ensure incidents are identified, analyzed, contained, and reported effectively.
+Scope: Applies to all IT systems and data assets.
+Incident Definition: Any event that jeopardizes confidentiality, integrity, or availability.
     </pre>
 
-    <hr/>
-
-    <h2>Playbook snippets (quick actions)</h2>
-    <h3>Ransomware playbook — quick checklist</h3>
+    <h2>5. Detection & Analysis</h2>
+    <p>Εργαλεία και ενδείξεις που βοηθούν στον εντοπισμό περιστατικών:</p>
     <ul>
-      <li>Disconnect affected hosts from network (isolate)</li>
-      <li>Capture memory & image disk for forensics</li>
-      <li>Block C2 domains/IPs</li>
-      <li>Restore from offline known-good backups</li>
-      <li>Rotate credentials & reset domain admin passwords</li>
-      <li>Notification & legal assessment (data breach)</li>
+      <li><strong>SIEM</strong> alerts (π.χ. Splunk, ELK, QRadar)</li>
+      <li><strong>EDR logs</strong> (CrowdStrike, Defender for Endpoint)</li>
+      <li><strong>Network traffic analysis</strong> με Wireshark / Zeek</li>
+      <li><strong>Host logs</strong> – Windows Event Viewer, syslog</li>
     </ul>
 
-    <h3>Compromised account playbook</h3>
-    <ol>
-      <li>Disable account</li>
-      <li>Reset password & revoke tokens</li>
-      <li>Search for lateral movement & privilege escalation</li>
-      <li>Investigate MFA logs</li>
-    </ol>
+    <h3>Παράδειγμα Ανίχνευσης με Splunk Query</h3>
+    <pre>
+index=security sourcetype=windows:security EventCode=4625 
+| stats count by user, src_ip 
+| where count > 10
+    </pre>
 
-    <hr/>
+    <h3>Καταγραφή Ενεργειών (Incident Log)</h3>
+    <table class="table">
+      <tr><th>Ώρα</th><th>Ενέργεια</th><th>Υπεύθυνος</th></tr>
+      <tr><td>09:30</td><td>Ανιχνεύθηκε ύποπτη σύνδεση</td><td>Analyst</td></tr>
+      <tr><td>09:40</td><td>Απομόνωση workstation</td><td>CSIRT Lead</td></tr>
+      <tr><td>09:50</td><td>Λήψη μνήμης</td><td>Forensic Analyst</td></tr>
+    </table>
 
-    <h2>Exercises & Practical Tasks (σου τα δίνω - κάν' τα)</h2>
-    <ol>
-      <li>Set up a small lab: 2 VMs (Windows client, Kali attacker) + Wireshark. Simulate a phishing link and capture traffic.</li>
-      <li>Do a disk image of a test VM (use dd or FTK Imager) and practice mounting & carving files with Autopsy.</li>
-      <li>Use Volatility to extract process listing from a memory dump (practice command examples available in docs).</li>
-      <li>Run Nessus / OpenVAS against a test server and create remediation plan prioritized by CVSS.</li>
-    </ol>
+    <h2>6. Forensic Investigation</h2>
+    <h3>Memory Analysis (Volatility)</h3>
+    <pre>
+volatility -f memory.img imageinfo
+volatility -f memory.img --profile=Win10x64_19041 pslist
+volatility -f memory.img malfind > malware_report.txt
+    </pre>
 
-    <hr/>
+    <h3>Disk Forensics (Autopsy / Sleuth Kit)</h3>
+    <pre>
+fls -r -m / -p evidence.dd > filelist.txt
+icat evidence.dd 12345 > suspect_file.exe
+    </pre>
 
-    <h2>Mock Q&A — CSIRT / Forensics / TI (εξάσκηση)</h2>
-    <h3>Q1. Τι περιλαμβάνει η 'chain of custody' και γιατί είναι σημαντική;</h3>
-    <p><strong>A:</strong> Καταγραφή ποιος είχε πρόσβαση/χειρίστηκε evidence, timestamps, αποθηκευτικό μέσο, αποδεικτικά hashes. Σημαντική για τη νομική αξιοπιστία και αποφυγή αμφισβήτησης στοιχείων.</p>
+    <h3>YARA Scanning Example</h3>
+    <pre>
+rule Suspicious_PDF {
+  meta: author="CSIRT"
+  strings: $pdf = "%PDF" $url = /http:\/\/[A-Za-z0-9\.\-]+/
+  condition: $pdf and $url
+}
+yara Suspicious_PDF.yar evidence/
+    </pre>
 
-    <h3>Q2. Πότε παίρνουμε memory dump;</h3>
-    <p><strong>A:</strong> Όταν υποπτευόμαστε ανώμαλη δραστηριότητα που μπορεί να είναι only in memory (fileless malware, in-memory loaders, credentials). Πρέπει να είναι σχεδιασμένο και τεκμηριωμένο — live capture αλλοιώνει την κατάσταση, γι' αυτό ακολουθείστε playbook.</p>
-
-    <h3>Q3. Διαφορά μεταξύ IOC και TTP;</h3>
-    <p><strong>A:</strong> IOC = Indicator of Compromise (specific artifacts: IPs, hashes). TTP = Tactics, Techniques, Procedures — describes adversary behaviour (MITRE ATT&CK techniques).</p>
-
-    <h3>Q4. Τι είναι EDR και τι επιπλέον κάνει σε σχέση με παραδοσιακό AV;</h3>
-    <p><strong>A:</strong> EDR συλλέγει telemetry (process trees, file writes, network connections), επιτρέπει hunting, isolation & rollback, και παρέχει rich forensic data — παραδοσιακό AV κάνει signature-based scanning & remediation.</p>
-
-    <h3>Q5. Ποια είναι τα κρίσιμα βήματα όταν εντοπίζεται ransomware;</h3>
-    <p><strong>A:</strong> isolate hosts, preserve evidence (image), block C2, notify legal, restore from offline backups, reset creds, root cause analysis & improve controls.</p>
-
-    <hr/>
-
-    <h2>Πηγές & Further reading</h2>
-    <ul>
-      <li>NIST SP 800-61r2 — Computer Security Incident Handling Guide (για IR best practices)</li>
-      <li>MITRE ATT&CK — για mapping TTPs</li>
-      <li>Volatility docs — memory forensics</li>
-      <li>Autopsy / Sleuthkit documentation</li>
+    <h2>7. Containment, Eradication & Recovery</h2>
+    <ul class="checklist">
+      <li>Απομόνωση μολυσμένων συστημάτων</li>
+      <li>Καθαρισμός malware ή πλήρης επαναφορά</li>
+      <li>Ενημέρωση patches και passwords</li>
+      <li>Έλεγχος για persistence mechanisms</li>
+      <li>Επαλήθευση επαναφοράς (validation & monitoring)</li>
     </ul>
 
-    <div class="footer">Τέλος κεφαλαίου — Αν θέλεις, εξάγω αυτό το κεφάλαιο σε PDF για tablet ή το ενσωματώνω στο ZIP. Θες PDF ή να προχωρήσω με πρακτικά labs σε λεπτομέρεια (π.χ. βήμα-βήμα Volatility/Autopsy commands);</div>
+    <h2>8. Post-Incident Activities</h2>
+    <ul>
+      <li>Lessons Learned Meeting (εντός 7 ημερών)</li>
+      <li>Root Cause Analysis (τεχνικό και οργανωτικό)</li>
+      <li>Ενημέρωση IR playbooks / training materials</li>
+      <li>Reporting προς Management ή CSIRT-CY</li>
+    </ul>
+
+    <h2>9. Playbooks (παραδείγματα)</h2>
+    <table class="table">
+      <tr><th>Είδος Συμβάντος</th><th>Βασικά Βήματα</th></tr>
+      <tr><td>Phishing</td><td>Isolate email → Extract headers → Block domain → Awareness email</td></tr>
+      <tr><td>Malware Infection</td><td>Disconnect host → Acquire memory → Scan with YARA → Reimage</td></tr>
+      <tr><td>Data Breach</td><td>Notify DPO → Contain exposure → Forensic review → Notify regulator</td></tr>
+    </table>
+
+    <h2>10. Tools Summary</h2>
+    <ul>
+      <li><strong>Volatility</strong> – Memory analysis</li>
+      <li><strong>Autopsy / Sleuth Kit</strong> – Disk forensic</li>
+      <li><strong>Cuckoo Sandbox</strong> – Malware dynamic analysis</li>
+      <li><strong>Wireshark / Zeek</strong> – Network investigation</li>
+      <li><strong>Splunk / ELK</strong> – SIEM analysis</li>
+    </ul>
+
+    <h2>11. Exam Q&A</h2>
+    <h3>Q1.</h3><p>Ποια είναι τα στάδια του Incident Response Lifecycle;</p>
+    <p><strong>A:</strong> Preparation → Detection → Containment → Recovery → Lessons Learned.</p>
+
+    <h3>Q2.</h3><p>Τι κάνει το εργαλείο Volatility;</p>
+    <p><strong>A:</strong> Ανάλυση μνήμης RAM για ανίχνευση κακόβουλων διεργασιών.</p>
+
+    <h3>Q3.</h3><p>Πότε γίνεται η αναφορά σε CSIRT-CY;</p>
+    <p><strong>A:</strong> Εντός 24 ωρών από την ανίχνευση περιστατικού (ΚΔΠ 389/2020).</p>
+
+    <h3>Q4.</h3><p>Ποια εργαλεία χρησιμοποιούνται για forensic imaging;</p>
+    <p><strong>A:</strong> FTK Imager, dd, Autopsy/Sleuth Kit.</p>
+
+    <h3>Q5.</h3><p>Τι είναι Playbook;</p>
+    <p><strong>A:</strong> Προκαθορισμένα βήματα αντιμετώπισης συγκεκριμένου τύπου περιστατικών.</p>
+
+    <h2>12. Exam Tips</h2>
+    <ul>
+      <li>Θυμήσου τη σειρά των IR σταδίων — είναι συχνή ερώτηση.</li>
+      <li>Συνδύασε ISO/NIST γνώσεις όταν περιγράφεις διαδικασία IR.</li>
+      <li>Να γνωρίζεις 2–3 εργαλεία ανά στάδιο (SIEM για detection, Volatility για analysis, Autopsy για disk).</li>
+      <li>Απάντησε concisely, με keywords: “Containment – isolate system”, “Recovery – validate integrity”.</li>
+    </ul>
   </div>
 </main>
 </body>
