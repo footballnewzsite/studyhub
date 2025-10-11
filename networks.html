@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="el">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Networking Fundamentals — Αναλυτικά</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="header"><div class="container">
+  <div class="logo">StudyHub — Networking</div>
+  <div class="nav">
+    <a href="index.html">Αρχική</a>
+    <a href="networks.html">Networking</a>
+    <a href="standards.html" class="active">ISO / NIST</a>
+    <a href="csirt.html">CSIRT</a>
+    <a href="mock_exams.html">Mock Exams</a>
+    <a href="wireshark.html">Wireshark</a>
+    <a href="glossary.html">Glossary</a>
+  </div>
+</div></header>
+
+<main class="container">
+  <div class="card">
+    <h1>Networking Fundamentals — Αναλυτικά</h1>
+
+    <h2>Εισαγωγή — Τι είναι ένα δίκτυο υπολογιστών</h2>
+    <p>Δίκτυο (network) = σύνολο συσκευών (hosts, servers, routers, switches) που επικοινωνούν για να ανταλλάξουν δεδομένα. Στόχοι: μεταφορά δεδομένων, resource sharing, υπηρεσίες (web, mail, DNS).</p>
+
+    <h2>Είδη δικτύων — LAN / WAN / MAN / PAN / WLAN</h2>
+    <ul>
+      <li><strong>LAN (Local Area Network):</strong> Δίκτυα σε μικρή γεωγραφική περιοχή (γραφείο, κτίριο). Χαρακτηριστικά: υψηλές ταχύτητες, μικρή καθυστέρηση.</li>
+      <li><strong>WAN (Wide Area Network):</strong> Διασύνδεση LANs σε μεγάλες αποστάσεις (π.χ. internet, MPLS). Χαρακτηριστικά: μεγαλύτερη καθυστέρηση, χρήση trunking/ISP links.</li>
+      <li><strong>MAN (Metropolitan Area Network):</strong> Κάλυψη πόλης ή περιοχής (π.χ. campus network).</li>
+      <li><strong>PAN (Personal Area Network):</strong> Πολύ μικρή εμβέλεια (Bluetooth, USB tethering).</li>
+      <li><strong>WLAN (Wireless LAN):</strong> Ασύρματα τοπικά δίκτυα (Wi-Fi). Προσοχή σε security: WPA2/WPA3, SSID separation, guest network.</li>
+    </ul>
+
+    <h2>OSI model — διάγραμμα & περιγραφή</h2>
+    <div class="diagram" aria-hidden="true">
+      <!-- OSI stacked SVG -->
+      <svg width="100%" height="220" viewBox="0 0 900 220" xmlns="http://www.w3.org/2000/svg">
+        <rect width="100%" height="220" fill="#021623"/>
+        <g transform="translate(40,20)" font-family="Arial" font-size="13">
+          <rect x="0" y="0" width="800" height="26" fill="#0b3b57"/><text x="14" y="18" fill="#cff0ff">7 - Application  — HTTP, DNS, SMTP (user-facing protocols)</text>
+          <rect x="0" y="32" width="800" height="26" fill="#0b4e6f"/><text x="14" y="50" fill="#cff0ff">6 - Presentation — TLS/SSL, encoding, encryption</text>
+          <rect x="0" y="64" width="800" height="26" fill="#0b6287"/><text x="14" y="82" fill="#cff0ff">5 - Session — sessions, sockets, session management</text>
+          <rect x="0" y="96" width="800" height="26" fill="#0b76a0"/><text x="14" y="114" fill="#cff0ff">4 - Transport — TCP, UDP (ports, reliability)</text>
+          <rect x="0" y="128" width="800" height="26" fill="#0b8aa8"/><text x="14" y="146" fill="#cff0ff">3 - Network — IP, routing, fragmentation</text>
+          <rect x="0" y="160" width="800" height="26" fill="#0b9fb8"/><text x="14" y="178" fill="#cff0ff">2 - Data Link — Ethernet, MAC, switches, ARP</text>
+          <rect x="0" y="192" width="800" height="26" fill="#0bb5c8"/><text x="14" y="210" fill="#021623">1 - Physical — Cables, fiber, wireless signals</text>
+        </g>
+      </svg>
+    </div>
+    <p>Σημείωση: το OSI είναι θεωρητικό μοντέλο· στην πράξη χρησιμοποιούμε κυρίως το TCP/IP model, αλλά OSI βοηθά να καταλάβεις που λειτουργούν τα πρωτόκολλα και οι επιθέσεις.</p>
+
+    <h2>TCP/IP Model & Πρωτόκολλα</h2>
+    <p>Το TCP/IP model συνήθως έχει 4 layers: Application, Transport, Internet, Network Access. Σημαντικά πρωτόκολλα:</p>
+    <ul>
+      <li><strong>IP (Internet Protocol):</strong> Διευθυνσιοδότηση & δρομολόγηση (IPv4, IPv6).</li>
+      <li><strong>TCP (Transmission Control Protocol):</strong> connection-oriented, reliability (sequence numbers, ACKs, retransmission).</li>
+      <li><strong>UDP (User Datagram Protocol):</strong> connectionless, low overhead, no guaranteed delivery.</li>
+      <li><strong>ICMP:</strong> control messages (ping / traceroute replies).</li>
+      <li><strong>HTTP/HTTPS, DNS, SMTP, FTP:</strong> application protocols που τρέχουν πάνω σε TCP/UDP.</li>
+    </ul>
+
+    <h3>TCP vs UDP — Πότε χρησιμοποιούμε ποιο;</h3>
+    <ul>
+      <li><strong>TCP:</strong> όταν χρειαζόμαστε αξιόπιστη μετάδοση: web browsing (HTTP/HTTPS), email (SMTP/IMAP), file transfer.</li>
+      <li><strong>UDP:</strong> όταν προτιμούμε χαμηλή καθυστέρηση και ανεκτικότητα σε απώλειες: VoIP, video streaming, DNS queries.</li>
+    </ul>
+
+    <h3>TCP 3-way handshake (SVG diagram)</h3>
+    <div class="diagram" aria-hidden="true">
+      <svg width="100%" height="120" viewBox="0 0 900 120" xmlns="http://www.w3.org/2000/svg">
+        <rect width="100%" height="100%" fill="#021623"/>
+        <text x="50" y="22" fill="#cff0ff" font-family="Arial" font-size="12">Client</text>
+        <text x="440" y="22" fill="#cff0ff" font-family="Arial" font-size="12">Server</text>
+        <line x1="120" y1="40" x2="380" y2="40" stroke="#75d2ff" stroke-width="2" marker-end="url(#arrow)"/>
+        <text x="200" y="32" fill="#cff0ff">SYN (seq=x)</text>
+        <line x1="380" y1="60" x2="120" y2="60" stroke="#75d2ff" stroke-width="2" marker-end="url(#arrow)"/>
+        <text x="230" y="72" fill="#cff0ff">SYN-ACK (seq=y, ack=x+1)</text>
+        <line x1="120" y1="88" x2="380" y2="88" stroke="#75d2ff" stroke-width="2" marker-end="url(#arrow)"/>
+        <text x="240" y="80" fill="#cff0ff">ACK (ack=y+1)</text>
+        <defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#75d2ff"/></marker></defs>
+      </svg>
+    </div>
+    <p><small>Σημείο εξέτασης: κατανοήστε flags (SYN, ACK, FIN, RST) και τι δείχνει ένα incomplete handshake (SYN flood).</small></p>
+
+    <h2>IPv4, IPv6 — Public vs Private IPs</h2>
+    <p><strong>IPv4:</strong> 32-bit addresses (π.χ. 192.168.1.10). Χωρίζονται σε ranges δημόσια (public) και ιδιωτικά (private).</p>
+    <p><strong>Private IPv4 ranges (RFC1918):</strong></p>
+    <pre>
+10.0.0.0/8       (10.0.0.0 – 10.255.255.255)
+172.16.0.0/12    (172.16.0.0 – 172.31.255.255)
+192.168.0.0/16   (192.168.0.0 – 192.168.255.255)
+    </pre>
+    <p>Οι private διευθύνσεις δεν είναι δρομολογήσιμες στο public internet — για πρόσβαση στο Internet χρησιμοποιείται NAT.</p>
+
+    <h3>NAT (Network Address Translation)</h3>
+    <p>Μεταφράζει private → public addresses (και ports). <strong>PAT</strong> (Port Address Translation) επιτρέπει πολλούς hosts πίσω από ένα public IP.</p>
+    <p>Πρακτική συνέπεια: σε server logs βλέπεις public IP του NAT gateway, όχι απαραίτητα τον τελικό host — για forensics χρειάζεσαι NAT logs.</p>
+
+    <h2>CIDR & Subnetting — Βήμα-βήμα (πρακτικό παράδειγμα)</h2>
+    <p>CIDR notation: <code>192.168.10.0/24</code> σημαίνει prefix length 24, μάσκα 255.255.255.0.</p>
+
+    <h3>Παράδειγμα: /24 → 4 subnets (θέλουμε 4 υποδίκτυα)</h3>
+    <ol>
+      <li>/24 έχει 256 addresses (0–255), usable hosts: 254 (αφαιρούμε network & broadcast).</li>
+      <li>Για 4 subnets χρειάζεσαι 2 επιπλέον bits (2^2 = 4). Νέα μάσκα: /26 (24+2).</li>
+      <li>/26 έχει 64 addresses (usable 62). Subnet ranges:</li>
+    </ol>
+    <pre>
+192.168.10.0/26    hosts: 192.168.10.1 – 192.168.10.62   broadcast: 192.168.10.63
+192.168.10.64/26   hosts: 192.168.10.65 – 192.168.10.126  broadcast: 192.168.10.127
+192.168.10.128/26  hosts: 192.168.10.129 – 192.168.10.190 broadcast: 192.168.10.191
+192.168.10.192/26  hosts: 192.168.10.193 – 192.168.10.254 broadcast: 192.168.10.255
+    </pre>
+    <p><small>Exam tip: μάθε γρήγορα τις δυνάμεις του 2 (bit → hosts): /30 (2 hosts), /29 (6 hosts), /28 (14), /27 (30), /26 (62), κ.λπ.</small></p>
+
+    <h2>Δικτυακές Συσκευές — Router / Switch / Firewall / Access Point</h2>
+    <ul>
+      <li><strong>Switch:</strong> λειτουργεί στο Data Link (MAC), μαθαίνει MACs, κάνει frame switching. Layer 2 device.</li>
+      <li><strong>Router:</strong> λειτουργεί στο Network layer (IP), δρομολογεί packets μεταξύ subnets.</li>
+      <li><strong>Firewall:</strong> φιλτράρει κυκλοφορία με κανόνες (stateful vs stateless).</li>
+      <li><strong>Access Point:</strong> AP παρέχει Wi-Fi connectivity — ρυθμίσεις ασφαλείας: WPA2/WPA3, guest SSID, strong passphrase.</li>
+    </ul>
+
+    <h2>VLANs — Λογική διαμέριση δικτύου</h2>
+    <p>VLANs δημιουργούν πολλαπλά broadcast domains πάνω σε ένα switch (tagging με 802.1Q). Χρήση: segmentation (π.χ. user VLAN, server VLAN, guest VLAN).</p>
+    <p><small>Δοκιμαστική ερώτηση: τι είναι VLAN hopping; (απάντηση: επίθεση που εκμεταλλεύεται trunk/native VLAN configuration).</small></p>
+
+    <h2>Common network services & ports (σύντομη αναφορά)</h2>
+    <table class="table" role="table">
+      <tr><th>Service</th><th>Protocol</th><th>Port</th></tr>
+      <tr><td>HTTP</td><td>TCP</td><td>80</td></tr>
+      <tr><td>HTTPS</td><td>TCP</td><td>443</td></tr>
+      <tr><td>DNS</td><td>UDP/TCP</td><td>53</td></tr>
+      <tr><td>SMTP</td><td>TCP</td><td>25</td></tr>
+      <tr><td>SSH</td><td>TCP</td><td>22</td></tr>
+      <tr><td>RDP</td><td>TCP</td><td>3389</td></tr>
+    </table>
+
+    <h2>Πρακτικά εργαλεία & βασικές εντολές</h2>
+    <ul>
+      <li><code>ipconfig / ifconfig / ip addr show</code> — προβολή IP configuration</li>
+      <li><code>ping &lt;host&gt;</code> — connectivity test</li>
+      <li><code>traceroute / tracert</code> — δρομολόγηση path</li>
+      <li><code>netstat -an / ss -tulnp</code> — ανοιχτές συνδέσεις/πορτ</li>
+      <li><code>nmap -sS -p1-65535 &lt;target&gt;</code> — SYN scan για πόρτες</li>
+      <li><code>tcpdump -i eth0 -w capture.pcap</code> — capture packets (analyze in Wireshark)</li>
+    </ul>
+
+    <h2>Wireshark example (πρακτικό lab)</h2>
+    <ol>
+      <li>Start capture on the interface that carries traffic.</li>
+      <li>Filter SYN packets: <code>tcp.flags.syn == 1 and tcp.flags.ack == 0</code> to view connection attempts.</li>
+      <li>To view DNS queries: <code>dns</code>.</li>
+      <li>Follow TCP stream: Right-click packet → Follow → TCP Stream — βλέπεις το payload της σύνδεσης.</li>
+      <li>Exam tip: αναγνώρισε three-way handshake, TCP reset (RST), and retransmissions.</li>
+    </ol>
+
+    <h2>Common Network Attacks — σύντομη παρουσίαση</h2>
+    <ul>
+      <li><strong>ARP spoofing / MITM:</strong> attacker forges ARP replies to intercept traffic.</li>
+      <li><strong>SYN flood (DoS):</strong> many SYNs without completing handshake — resource exhaustion.</li>
+      <li><strong>DNS poisoning:</strong> serve malicious IPs to clients.</li>
+      <li><strong>Rogue DHCP:</strong> attacker gives fake IP/gateway to clients.</li>
+    </ul>
+
+    <h2>Πρακτικό παράδειγμα: Διάγνωση connectivity issue</h2>
+    <p>Σενάριο: χρήστης δεν έχει internet. Βήματα διάγνωσης:</p>
+    <ol>
+      <li>Ελέγξτε IP configuration: <code>ipconfig /all</code> ή <code>ip addr</code>. Βλέπετε private IP; υπάρχει default gateway; DNS servers;</li>
+      <li>Ping default gateway — αν αποτυγχάνει, πρόβλημα στο local link / switch;</li>
+      <li>Traceroute σε 8.8.8.8 — δείτε που κόβεται το path;</li>
+      <li>Έλεγχος NAT: αν το host έχει μόνο private IP και gateway δεν απαντά — πιθανό πρόβλημα στο router ή ISP;</li>
+      <li>Ελέγξτε DHCP server logs, switch port status, και αν υπάρχει 802.1X authentication.</li>
+    </ol>
+
+    <h2>Σημεία που πρέπει να ΞΕΡΕΙΣ για τις εξετάσεις (quick checklist)</h2>
+    <ul>
+      <li>Διαφορές TCP / UDP & τι σημαίνει κάθε flag.</li>
+      <li>Υπολογισμός subnets — γρήγορα (CIDR → hosts / usable IPs).</li>
+      <li>Private IP ranges, τι είναι NAT και επηρεάζει το forensics.</li>
+      <li>Πώς να χρησιμοποιείς Wireshark / tcpdump / nmap (βασικές εντολές & φίλτρα).</li>
+      <li>Διαφορά switch vs router vs firewall, τι κάνει κάθε συσκευή.</li>
+    </ul>
+
+    <h2>Ερωτήσεις εξάσκησης (με απαντήσεις)</h2>
+    <h3>Ε1. Πόσα usable hosts έχει το δίκτυο 192.168.1.0/28;</h3>
+    <p><strong>Α:</strong> /28 => 16 addresses, usable hosts = 14 (αφαιρούμε network & broadcast).</p>
+
+    <h3>Ε2. Ποια είναι τα RFC1918 private ranges;</h3>
+    <p><strong>Α:</strong> 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16.</p>
+
+    <h3>Ε3. Τι δείχνει ένα packet με flags SYN=1, ACK=0;</h3>
+    <p><strong>Α:</strong> Πρόκειται για αρχικό SYN από client — το πρώτο βήμα του TCP 3-way handshake.</p>
+
+    <h3>Ε4. Ποια εντολή χρησιμοποιείς για να τραβήξεις όλα τα packets στην διεπαφή eth0 και να τα αποθηκεύσεις;</h3>
+    <p><strong>Α:</strong> <code>tcpdump -i eth0 -w capture.pcap</code></p>
+
+    <h3>Ε5. Πώς θα διαχωρίσεις traffic για servers και users σε ένα switch;</h3>
+    <p><strong>Α:</strong> Χρήση VLANs — assign server ports σε server VLAN, user ports σε user VLAN, configure trunking για uplink.</p>
+
+    <h2>Extra — Σύντομη αναφορά IPv6</h2>
+    <p>IPv6: 128-bit διευθύνσεις, συντομογραφία hex, common prefix /64 για subnets. Μερικά βασικά: link-local addresses (fe80::/10), global unicast (2000::/3).</p>
+
+    <h2>Συμβουλές μελέτης & εργαστήρια</h2>
+    <ol>
+      <li>Κάνε 10 μέρες labs: Wireshark captures, Nmap scans on VulnHub VMs.</li>
+      <li>Εξάσκηση subnetting 10 ερωτήσεις/ημέρα (χρόνος στόχος <2 λεπτά/ερώτηση).</li>
+      <li>Δημιούργησε μικρό lab με 3 VM: 1 web server, 1 client, 1 attacker (Kali) και εξάσκηση ARP spoofing / packet capture σε isolated network.</li>
+    </ol>
+
+  </div>
+
+  <div class="footer">Αν θέλεις, θα κάνω export αυτή τη σελίδα σαν ξεχωριστό PDF ή θα ενσωματώσω το ίδιο περιεχόμενο στη βασική σου offline έκδοση.</div>
+</main>
+</body>
+</html>

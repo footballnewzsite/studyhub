@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="el">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ISO / NIST / ΚΔΠ 389/2020 — Αναλυτικά</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="header"><div class="container">
+  <div class="logo">StudyHub — Standards</div>
+  <div class="nav">
+    <a href="index.html">Αρχική</a>
+    <a href="networks.html">Networking</a>
+    <a href="standards.html" class="active">ISO / NIST</a>
+    <a href="csirt.html">CSIRT</a>
+    <a href="mock_exams.html">Mock Exams</a>
+    <a href="wireshark.html">Wireshark</a>
+    <a href="glossary.html">Glossary</a>
+  </div>
+</div></header>
+
+<main class="container">
+  <div class="card">
+    <h1>ISO 27001, NIST SP 800-53 &amp; ΚΔΠ 389/2020 — Αναλυτικός Οδηγός</h1>
+
+    <h2>Εισαγωγή — Γιατί standards και νομοθεσία;</h2>
+    <p>
+      Τα πρότυπα και οι ρυθμίσεις (ISO, NIST, τοπικές αποφάσεις όπως η ΚΔΠ 389/2020) δίνουν
+      το πλαίσιο για ένα οργανωμένο Information Security Management System (ISMS), την εφαρμογή
+      τεχνικών &amp; οργανωτικών μέτρων, και την τυποποίηση του τρόπου που ένας οργανισμός
+      προστατεύει δεδομένα και υπηρεσίες. Τα standards βοηθούν επίσης σε auditing, πιστοποίηση
+      και τεκμηρίωση συμμόρφωσης.
+    </p>
+
+    <h2>ISO/IEC 27001 — Βασικά (ISMS &amp; PDCA)</h2>
+    <div class="diagram" aria-hidden="true">
+      <!-- PDCA SVG -->
+      <svg width="100%" height="90" xmlns="http://www.w3.org/2000/svg">
+        <rect width="100%" height="100%" fill="#021623"/>
+        <text x="12" y="22" fill="#cff0ff" font-family="Arial" font-size="12">PDCA: Plan → Do → Check → Act (ISMS lifecycle)</text>
+      </svg>
+    </div>
+
+    <h3>Τι είναι ISO 27001;</h3>
+    <p>
+      Το ISO/IEC 27001 είναι διεθνές πρότυπο που καθορίζει απαιτήσεις για την ανάπτυξη,
+      εφαρμογή, διατήρηση και βελτίωση ενός ISMS (Information Security Management System).
+      Περιλαμβάνει διαδικασίες για risk assessment, εφαρμογή controls και συνεχή βελτίωση (PDCA).
+    </p>
+
+    <h3>Κύριες φάσεις (με παραδείγματα)</h3>
+    <ol>
+      <li><strong>Plan:</strong> ορισμός scope, πολιτικών, κατάλογος assets, εκτίμηση κινδύνου (risk assessment).</li>
+      <li><strong>Do:</strong> εφαρμογή controls (π.χ. encryption, access control, patch management).</li>
+      <li><strong>Check:</strong> monitoring, internal audits, vulnerability scanning, KPI measurement.</li>
+      <li><strong>Act:</strong> διορθωτικές ενέργειες, management review, ενημέρωση πολιτικών.</li>
+    </ol>
+
+    <h3>Annex A — Controls (συνοπτικά)</h3>
+    <p>
+      Το Annex A του ISO 27001 (έκδοση 2022) περιλαμβάνει ένα σύνολο security controls — συνολικά
+      περίπου 90+ ελέγχοι ομαδοποιημένοι σε θεματικές (Organisational, People, Physical, Technological). 
+      Τα controls χρησιμοποιούνται για το Risk Treatment και για την τεκμηρίωση της Statement of Applicability. 
+      (Σημείωση: το πλήθος/δομή των controls ανανεώθηκε στην έκδοση 2022.) :contentReference[oaicite:1]{index=1}
+    </p>
+
+    <table class="table">
+      <tr><th>Παράδειγμα Annex A</th><th>Πρακτικό παράδειγμα ελέγχου</th></tr>
+      <tr><td>A.5 - Policies (Organisational)</td><td>Documented IS policies, approved by top management</td></tr>
+      <tr><td>A.9 - Access Control</td><td>RBAC, MFA για privileged accounts, periodic privilege review</td></tr>
+      <tr><td>A.12 - Operations</td><td>Change management, secure configuration, malware protection</td></tr>
+      <tr><td>A.17 - Business continuity</td><td>Backup policy, RTO &amp; RPO, DR tests</td></tr>
+    </table>
+
+    <h3>Πρακτικό παράδειγμα — Risk Assessment (σκιαγράφηση)</h3>
+    <ol>
+      <li>Κατάλογος assets (servers, databases, applications)</li>
+      <li>Για κάθε asset: προσδιορισμός threats &amp; vulnerabilities</li>
+      <li>Προσδιορισμός επιπτώσεων (impact) &amp; πιθανότητας (likelihood)</li>
+      <li>Υπολογισμός risk score (π.χ. likelihood × impact)</li>
+      <li>Risk Treatment: Accept / Mitigate / Transfer / Avoid — τεκμηρίωση &amp; κατανομή ιδιοκτησίας</li>
+    </ol>
+
+    <h2>NIST SP 800-53 — Κατάλογος controls (σύντομη παρουσίαση)</h2>
+    <p>
+      Το NIST SP 800-53 (Revision 5) παρέχει ένα πλήρες catalogue security &amp; privacy controls,
+      οργανωμένα σε οικογένειες όπως AC (Access Control), AU (Audit &amp; Accountability), IR (Incident Response),
+      SI (System Integrity) κ.ά. Το NIST χρησιμοποιείται ευρέως ως πρακτικός οδηγός για τεχνικές πολιτικές
+      και mapping σε ποικίλα περιβάλλοντα. :contentReference[oaicite:2]{index=2}
+    </p>
+
+    <h3>Κύριες οικογένειες (επιλεγμένες)</h3>
+    <ul>
+      <li><strong>AC</strong> — Access Control (account management, remote access)</li>
+      <li><strong>IA</strong> — Identification &amp; Authentication</li>
+      <li><strong>AU</strong> — Audit &amp; Accountability (logging, log retention)</li>
+      <li><strong>IR</strong> — Incident Response (playbooks, reporting)</li>
+      <li><strong>SI</strong> — System &amp; Information Integrity (malware protection, integrity checks)</li>
+      <li><strong>CP</strong> — Contingency Planning (BCP/DR)</li>
+      <li><strong>RA</strong> — Risk Assessment</li>
+    </ul>
+
+    <h3>Practical mapping — ISO ↔ NIST (σύντομο δείγμα)</h3>
+    <table class="table">
+      <tr><th>ISO Annex A (concept)</th><th>Παράδειγμα NIST controls</th></tr>
+      <tr><td>Access Control (A.9)</td><td>NIST AC-1 (policy), AC-2 (account management), AC-17 (remote access)</td></tr>
+      <tr><td>Incident Management (A.16)</td><td>NIST IR-1..IR-9 (incident response planning, reporting)</td></tr>
+      <tr><td>Business Continuity (A.17)</td><td>NIST CP-1..CP-10 (contingency planning)</td></tr>
+    </table>
+
+    <h2>ΚΔΠ 389/2020 — Περίληψη και πρακτικές επιπτώσεις</h2>
+    <p>
+      Η απόφαση ΚΔΠ 389/2020 (Republic of Cyprus regulation) αφορά την ασφάλεια δικτύων και συστημάτων
+      πληροφοριών — θέτει υποχρεώσεις για οργανωτικά &amp; τεχνικά μέτρα, αξιολόγηση κινδύνων, και κοινοποίηση
+      σημαντικών περιστατικών σε αρμόδια αρχή. Η Αρχή Ψηφιακής Ασφάλειας έχει επίσης εκδώσει εργαλειοθήκη
+      και οδηγίες για συμμόρφωση (toolkit) που διευκολύνουν την εφαρμογή των πρόνοιων. :contentReference[oaicite:3]{index=3}
+    </p>
+
+    <h3>Κύριες πρόνοιες (συνοπτικά &amp; πρακτικά)</h3>
+    <ul>
+      <li>Ετήσια αξιολόγηση κινδύνου και τεκμηρίωση των ευπαθειών/σημαντικών αδυναμιών. (reporting προς Αρχή για συγκεκριμένες πληροφορίες) :contentReference[oaicite:4]{index=4}</li>
+      <li>Υποχρέωση τεχνικών &amp; οργανωτικών μέτρων (π.χ. patch management, access control, backup strategy).</li>
+      <li>Υποχρέωση κοινοποίησης σημαντικών incidents στην Αρχή/επιβολή διαδικασιών incident handling και reporting.</li>
+      <li>Απαιτήσεις για συγκεκριμένους φορείς (π.χ. providers κρίσιμων υπηρεσιών) — ελέγξτε το πλήρες κείμενο για scopes &amp; deadlines. :contentReference[oaicite:5]{index=5}</li>
+    </ul>
+
+    <h3>Πρακτικό παράδειγμα συμμόρφωσης (action list)</h3>
+    <ol>
+      <li>Δημιούργησε/ενημέρωσε IS policies (acceptable use, access control, backup).</li>
+      <li>Εφάρμοσε vulnerability scanning &amp; patch management cadence (monthly/weekly για critical patches).</li>
+      <li>Καθιέρωσε IR playbooks και reporting flow (εσωτερικό &amp; στην Αρχή αν απαιτείται).</li>
+      <li>Διατήρησε τεκμηρίωση risk assessments &amp; αποδείξεις (evidence) για audits.</li>
+    </ol>
+
+    <h2>Παραδείγματα documents / templates (σύντομα)</h2>
+    <h3>1) Risk Treatment Plan — μικρό template</h3>
+    <pre>
+Asset: Web Server
+Threat: RCE via outdated CMS
+Vulnerability: outdated plugin v2.1
+Impact: High
+Likelihood: Medium
+Risk Score: High
+Treatment: Patch plugin (Mitigate), WAF rule (Mitigate), schedule monthly scans
+Owner: IT Security
+Timeline: Patch within 7 days
+    </pre>
+
+    <h3>2) Incident Notification template (σύντομο)</h3>
+    <pre>
+Subject: Incident Notification — [Incident ID]
+Date/Time: ...
+Summary: Brief summary of incident & impact
+Affected systems: ...
+Initial actions taken: containment, isolation
+Data affected: (type & scope)
+Notifications: sent to (internal/external)
+Contact person: Name, email, phone
+    </pre>
+
+    <h2>KPIs & Metrics (τι πρέπει να μετράς)</h2>
+    <ul>
+      <li>% critical patches applied within SLA (e.g. 30 days)</li>
+      <li>MTTR (Mean Time To Recover) for incidents</li>
+      <li>% successful backup restores (periodic restore tests)</li>
+      <li>Number of detected incidents per month &amp; % false positives</li>
+    </ul>
+
+    <h2>Audit &amp; Evidence — Τι κοιτάει ο auditor</h2>
+    <ol>
+      <li>Is there an ISMS scope &amp; policy approved by management?</li>
+      <li>Are risk assessments documented &amp; treated?</li>
+      <li>Existence of controls: access control, patch records, backups, logs.</li>
+      <li>Incident records &amp; lessons learned — proof of tabletop exercises / DR tests.</li>
+    </ol>
+
+    <h2>Σύντομος οδηγός υλοποίησης — Βήματα για 90 ημέρες</h2>
+    <ol>
+      <li>Day 1–14: Scope, policy draft, asset inventory, initial risk assessment.</li>
+      <li>Day 15–45: Implement quick wins (MFA, patch critical systems, backups).</li>
+      <li>Day 46–75: Configure logging &amp; SIEM basics, define IR playbooks.</li>
+      <li>Day 76–90: Run tabletop exercise, internal audit, management review, update roadmap.</li>
+    </ol>
+
+    <h2>Πηγές &amp; χρήσιμα links (για αναφορά)</h2>
+    <ul>
+      <li>ΚΔΠ 389/2020 — επίσημο κείμενο (Government Gazette / PDF). :contentReference[oaicite:6]{index=6}</li>
+      <li>Αρχή Ψηφιακής Ασφάλειας — εργαλειοθήκη / οδηγίες συμμόρφωσης. :contentReference[oaicite:7]{index=7}</li>
+      <li>ISO/IEC 27001 Annex A — οδηγίες &amp; λίστες controls (περιληπτικά). :contentReference[oaicite:8]{index=8}</li>
+      <li>NIST SP 800-53 Rev.5 — επίσημο publication &amp; control families. :contentReference[oaicite:9]{index=9}</li>
+    </ul>
+
+    <h2>Ερωτήσεις εξάσκησης (standards)</h2>
+    <h3>Q1. Τι είναι PDCA και πώς εφαρμόζεται στο ISMS;</h3>
+    <p><strong>A:</strong> Plan: scope &amp; risk assessment. Do: εφαρμόζονται controls. Check: audits &amp; monitoring. Act: διορθώσεις &amp; βελτιώσεις.</p>
+
+    <h3>Q2. Ποια είναι η σχέση ISO 27001 και Annex A;</h3>
+    <p><strong>A:</strong> Το ISO 27001 απαιτεί risk treatment και η Annex A παρέχει κατάλογο controls που μπορούν να εφαρμοστούν και να τεκμηριωθούν στη Statement of Applicability.</p>
+
+    <h3>Q3. Τι απαιτεί η ΚΔΠ 389/2020 σχετικά με incident reporting;</h3>
+    <p><strong>A:</strong> Υποχρεώνει τους φορείς να τηρούν διαδικασίες και να κοινοποιούν σημαντικά incidents στην αρμόδια αρχή, όπως περιγράφεται στο κείμενο της απόφασης. :contentReference[oaicite:10]{index=10}</p>
+
+    <div class="footer">Αν θέλεις, εξάγω αυτή τη σελίδα σε PDF ή την ενσωματώνω στο offline zip για άμεσο download. Θες PDF από αυτό το κεφάλαιο;</div>
+
+  </div>
+</main>
+</body>
+</html>
