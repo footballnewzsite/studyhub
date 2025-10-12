@@ -115,21 +115,11 @@ code,pre{background:#161b22;color:#fff;padding:4px 6px;border-radius:6px;}
       <li><strong>Recover</strong> – Επαναφορά υπηρεσιών και βελτίωση διαδικασιών</li>
     </ol>
 
-    <div class="diagram">
-      <svg viewBox="0 0 500 220">
-        <circle cx="100" cy="100" r="40" fill="#ff4d4d"/><text x="80" y="105" fill="#fff">Identify</text>
-        <circle cx="220" cy="60" r="40" fill="#ff4d4d"/><text x="205" y="65" fill="#fff">Protect</text>
-        <circle cx="340" cy="100" r="40" fill="#ff4d4d"/><text x="325" y="105" fill="#fff">Detect</text>
-        <circle cx="220" cy="160" r="40" fill="#ff4d4d"/><text x="200" y="165" fill="#fff">Respond</text>
-        <circle cx="440" cy="160" r="40" fill="#ff4d4d"/><text x="420" y="165" fill="#fff">Recover</text>
-      </svg>
-    </div>
-
     <h3>Subcategories & Implementation Tiers</h3>
     <ul>
-      <li>Περιλαμβάνει 23 Categories και 108 Subcategories (π.χ. ID.AM-1, PR.AC-3).</li>
-      <li>Τα <strong>Tiers</strong> (1–4) δείχνουν το επίπεδο ωριμότητας ασφάλειας (Partial → Adaptive).</li>
-      <li>Χρησιμοποιείται από οργανισμούς για risk management alignment με ISO 27001.</li>
+      <li>23 Categories και 108 Subcategories (π.χ. ID.AM-1, PR.AC-3)</li>
+      <li><strong>Tiers</strong> (1–4): Partial → Risk-Informed → Repeatable → Adaptive</li>
+      <li>Χρησιμοποιείται για alignment με ISO 27001 (mapping of controls)</li>
     </ul>
 
     <h2>4. ΚΔΠ 389/2020 — Εθνικό Πλαίσιο (Κύπρος)</h2>
@@ -151,6 +141,15 @@ code,pre{background:#161b22;color:#fff;padding:4px 6px;border-radius:6px;}
       <tr><td>Audit & Oversight</td><td>Έλεγχοι από Εθνική Αρχή Ασφάλειας</td></tr>
     </table>
 
+    <h3>Τεχνικά & Οργανωτικά Μέτρα</h3>
+    <ul>
+      <li>Τεχνικά: Firewall, IDS/IPS, antivirus, access control, patch management, encryption.</li>
+      <li>Οργανωτικά: CISO, awareness training, policy review, incident reporting διαδικασία.</li>
+    </ul>
+
+    <h3>Σχέση με NIS 2 Directive</h3>
+    <p>Η ΚΔΠ 389/2020 αναμένεται να ενισχυθεί με βάση την <strong>NIS2 Directive (ΕΕ 2022/2555)</strong>, που επιβάλλει αυστηρότερες κυρώσεις και accountability.</p>
+
     <h2>5. Συγκριτικός Πίνακας ISO vs NIST vs ΚΔΠ 389/2020</h2>
     <table class="table">
       <tr><th>Πλαίσιο</th><th>Εστίαση</th><th>Πεδίο Εφαρμογής</th><th>Προσέγγιση</th></tr>
@@ -159,18 +158,27 @@ code,pre{background:#161b22;color:#fff;padding:4px 6px;border-radius:6px;}
       <tr><td>ΚΔΠ 389/2020</td><td>Κανονιστική συμμόρφωση & αναφορά</td><td>Essential & Digital Service Providers</td><td>Νομική υποχρέωση (compliance-based)</td></tr>
     </table>
 
-    <h2>6. Πρακτικά Παραδείγματα Εφαρμογής</h2>
+    <h2>6. Γενικές Αρχές Ψηφιακής Ασφάλειας</h2>
+    <ul>
+      <li><strong>Least Privilege:</strong> Ελάχιστη απαραίτητη πρόσβαση σε χρήστες/συστήματα.</li>
+      <li><strong>Defense in Depth:</strong> Πολλαπλά επίπεδα προστασίας (firewall, AV, MFA).</li>
+      <li><strong>Zero Trust:</strong> Καμία εμπιστοσύνη χωρίς έλεγχο ταυτότητας.</li>
+      <li><strong>Security by Design:</strong> Ασφάλεια από το στάδιο σχεδίασης.</li>
+      <li><strong>Regular Patching:</strong> Συχνές ενημερώσεις και vulnerability scanning.</li>
+    </ul>
+
+    <h2>7. Πρακτικά Παραδείγματα Εφαρμογής</h2>
     <ul>
       <li><strong>ISO 27001:</strong> Τράπεζα δημιουργεί πολιτική Access Control και εκτελεί ετήσιο internal audit.</li>
       <li><strong>NIST CSF:</strong> Οργανισμός δημιουργεί Incident Response plan βασισμένο σε Detect → Respond → Recover.</li>
       <li><strong>ΚΔΠ 389/2020:</strong> Πάροχος ενέργειας ειδοποιεί το CSIRT-CY για DDoS attack σε critical infrastructure.</li>
     </ul>
 
-    <h2>7. Ερωτήσεις Εξάσκησης</h2>
+    <h2>8. Ερωτήσεις Εξάσκησης</h2>
     <h3>Q1.</h3><p>Ποιο είναι το κύριο αντικείμενο του ISO 27001;</p>
     <p><strong>A:</strong> Η ανάπτυξη και διαχείριση ενός ISMS για προστασία C-I-A.</p>
 
-    <h3>Q2.</h3><p>Ποιες είναι οι πέντε λειτουργίες του NIST CSF;</p>
+    <h3>Q2.</h3><p>Ποιες είναι οι 5 λειτουργίες του NIST CSF;</p>
     <p><strong>A:</strong> Identify, Protect, Detect, Respond, Recover.</p>
 
     <h3>Q3.</h3><p>Ποιο είναι το όριο χρόνου για incident report στο ΚΔΠ 389/2020;</p>
@@ -182,16 +190,26 @@ code,pre{background:#161b22;color:#fff;padding:4px 6px;border-radius:6px;}
     <h3>Q5.</h3><p>Σε ποιο πλαίσιο ανήκουν τα Implementation Tiers (Partial → Adaptive);</p>
     <p><strong>A:</strong> NIST Cybersecurity Framework.</p>
 
-    <h2>8. Exam Tips</h2>
-    <ul>
-      <li>Θυμήσου τις 3 αρχές: Confidentiality, Integrity, Availability.</li>
-      <li>Συνδύασε ISO (process-based) με NIST (function-based) στην απάντηση.</li>
-      <li>Αν δεις ερώτηση για νομική υποχρέωση, απάντησε ΚΔΠ 389/2020.</li>
-      <li>PDCA = continuous improvement cycle του ISO.</li>
-      <li>Για detection & response — NIST CSF.</li>
-    </ul>
+    <h3>Q6.</h3><p>Τι σημαίνει PDCA;</p>
+    <p><strong>A:</strong> Plan-Do-Check-Act — κύκλος συνεχούς βελτίωσης ISMS.</p>
 
+    <h3>Q7.</h3><p>Ποιο πλαίσιο είναι νομικά υποχρεωτικό στην Κύπρο;</p>
+    <p><strong>A:</strong> ΚΔΠ 389/2020.</p>
+
+    <h2>9. Exam Tips</h2>
+    <ul>
+      <li>Θυμήσου C-I-A (Confidentiality, Integrity, Availability).</li>
+      <li>PDCA κύκλος = ISO 27001, Tiers = NIST CSF.</li>
+      <li>ΚΔΠ 389/2020 → υποχρεωτικό reporting στο CSIRT-CY.</li>
+      <li>Mapping ISO ↔ NIST (π.χ. ISO A.5.25 = NIST IR-4).</li>
+      <li>Οργάνωσε απαντήσεις γύρω από risk-based και compliance-based λογικές.</li>
+    </ul>
   </div>
+
+  <footer>
+    © 2025 StudyHub — Complete Cybersecurity Exam Guide<br>
+    Created for offline & GitHub Pages use. All material compiled from official standards and trusted sources.
+  </footer>
 </main>
 </body>
 </html>
