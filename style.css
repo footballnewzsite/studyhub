@@ -4,7 +4,7 @@
    ============================== */
 
 :root {
-  --accent: #ff4d4d;
+  --accent: #4C763B;
   --bg: #0d1117;
   --bg-card: #161b22;
   --bg-header: #111;
@@ -112,7 +112,15 @@ a.btn {
 }
 
 a.btn:hover {
-  background: #ff2f2f;
+  background: #043915;
+}
+
+.btn {
+  background: var(--accent);
+}
+
+.btn:hover {
+  background: #043915;
 }
 
 /* ===== TABLES ===== */
