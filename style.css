@@ -34,7 +34,7 @@ html, body {
 
 header {
   background: var(--bg-header);
-  border-bottom: 2px solid var(--accent);
+  border-bottom: 2px solid var(--blue);
   padding: 12px 0;
   box-shadow: 0 0 6px #0007;
 }
