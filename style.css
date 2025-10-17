@@ -4,15 +4,20 @@
    ============================== */
 
 :root {
-  --accent: #4C763B;
-  --bg: #0d1117;
-  --bg-card: #161b22;
+  --accent: #0d1117;
+  --bg: #F2F2F2;
+  --bg-card: #e6e6e6;
   --bg-header: #111;
-  --text: #e6e6e6;
-  --text-light: #aaa;
-  --border: #2a2a2a;
+  --text: #0d1117;
+  --header-text: #e6e6e6;
+  --text-light: #7A7A73;
+  --btn-light: #2a2a2a;
+  --border: #444343;
   --radius: 12px;
-  --shadow: 0 0 10px #0006;
+  --shadow: 0 0 10px #0007;
+  --green: #386641;
+  --blue: #3674B5;
+  --dark-blue: #1b1f25;
 }
 
 html, body {
@@ -46,11 +51,11 @@ header .container {
 .logo {
   font-size: 1.2em;
   font-weight: bold;
-  color: var(--accent);
+  color: var(--header-text);
 }
 
 .nav a {
-  color: var(--text);
+  color: var(--header-text);
   text-decoration: none;
   margin: 0 10px;
   font-weight: 500;
@@ -58,12 +63,12 @@ header .container {
 }
 
 .nav a:hover {
-  color: var(--accent);
+  color: var(--blue);
 }
 
 .nav a.active {
-  color: var(--accent);
-  border-bottom: 2px solid var(--accent);
+  color: var(--blue);
+  border-bottom: 2px solid var(--blue);
 }
 
 /* ===== MAIN LAYOUT ===== */
@@ -112,7 +117,7 @@ a.btn {
 }
 
 a.btn:hover {
-  background: #043915;
+  background: var(--btn-light);
 }
 
 .btn {
@@ -139,7 +144,7 @@ th, td {
 
 th {
   background: var(--bg-header);
-  color: var(--accent);
+  color: var(--header-text);
 }
 
 /* ===== Q&A SECTION ===== */

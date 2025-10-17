@@ -10,26 +10,6 @@
 <meta property="og:image" content="assets/banner.png">
 <meta property="og:title" content="StudyHub — Cybersecurity Exam Prep">
 <meta property="og:description" content="Πλήρης οδηγός προετοιμασίας για εξετάσεις Κυβερνοασφάλειας">
-
-<style>
-:root {
-  --accent: #4C763B;
-}
-body {
-  background:#0d1117;
-  color:#e6e6e6;
-  font-family:"Segoe UI",sans-serif;
-  line-height:1.7;
-}
-header{background:#111;border-bottom:2px solid var(--accent);}
-.nav a.active{color:var(--accent);}
-h1,h2,h3{color:var(--accent);}
-code,pre{background:#161b22;color:#fff;padding:4px 6px;border-radius:6px;}
-.table{border-collapse:collapse;width:100%;margin-top:12px;}
-.table th,.table td{border:1px solid #333;padding:8px;}
-.diagram svg{max-width:100%;display:block;margin:auto;}
-ul.checklist li::before{content:"✓ ";color:var(--accent);}
-</style>
 </head>
 <body>
 
@@ -71,10 +51,10 @@ ul.checklist li::before{content:"✓ ";color:var(--accent);}
 
     <div class="diagram">
       <svg viewBox="0 0 600 200">
-        <circle cx="100" cy="100" r="45" fill="#ff4d4d"/><text x="70" y="105" fill="#fff" font-size="14">Preparation</text>
-        <circle cx="250" cy="100" r="45" fill="#ff4d4d"/><text x="215" y="105" fill="#fff" font-size="14">Detection</text>
-        <circle cx="400" cy="100" r="45" fill="#ff4d4d"/><text x="360" y="105" fill="#fff" font-size="14">Containment</text>
-        <circle cx="550" cy="100" r="45" fill="#ff4d4d"/><text x="520" y="105" fill="#fff" font-size="14">Recovery</text>
+        <circle cx="100" cy="100" r="45" fill="var(--blue)"/><text x="70" y="105" fill="#fff" font-size="14">Preparation</text>
+        <circle cx="250" cy="100" r="45" fill="var(--blue)"/><text x="215" y="105" fill="#fff" font-size="14">Detection</text>
+        <circle cx="400" cy="100" r="45" fill="var(--blue)"/><text x="360" y="105" fill="#fff" font-size="14">Containment</text>
+        <circle cx="550" cy="100" r="45" fill="var(--blue)"/><text x="520" y="105" fill="#fff" font-size="14">Recovery</text>
       </svg>
     </div>
 
@@ -194,19 +174,19 @@ yara Suspicious_PDF.yar evidence/
     </ul>
 
     <h2>11. Exam Q&A</h2>
-    <h3>Q1.</h3><p>Ποια είναι τα στάδια του Incident Response Lifecycle;</p>
+    <h3>Q1. Ποια είναι τα στάδια του Incident Response Lifecycle;</h3>
     <p><strong>A:</strong> Preparation → Detection → Containment → Recovery → Lessons Learned.</p>
 
-    <h3>Q2.</h3><p>Τι κάνει το εργαλείο Volatility;</p>
+    <h3>Q2. Τι κάνει το εργαλείο Volatility;</h3>
     <p><strong>A:</strong> Ανάλυση μνήμης RAM για ανίχνευση κακόβουλων διεργασιών.</p>
 
-    <h3>Q3.</h3><p>Πότε γίνεται η αναφορά σε CSIRT-CY;</p>
+    <h3>Q3. Πότε γίνεται η αναφορά σε CSIRT-CY;</h3>
     <p><strong>A:</strong> Εντός 24 ωρών από την ανίχνευση περιστατικού (ΚΔΠ 389/2020).</p>
 
-    <h3>Q4.</h3><p>Ποια εργαλεία χρησιμοποιούνται για forensic imaging;</p>
+    <h3>Q4. Ποια εργαλεία χρησιμοποιούνται για forensic imaging;</h3>
     <p><strong>A:</strong> FTK Imager, dd, Autopsy/Sleuth Kit.</p>
 
-    <h3>Q5.</h3><p>Τι είναι Playbook;</p>
+    <h3>Q5. Τι είναι Playbook;</h3>
     <p><strong>A:</strong> Προκαθορισμένα βήματα αντιμετώπισης συγκεκριμένου τύπου περιστατικών.</p>
 
     <h2>12. Exam Tips</h2>
